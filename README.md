@@ -1,2 +1,2 @@
-# DataLemur
+# DataLemur and Stratascratch
 
