@@ -1,3 +1,4 @@
+# DataLemur
 1.
 
 Given a table of candidates and their skills, you're tasked with finding the candidates best suited for an open Data Science job. You want to find candidates who are proficient in Python, Tableau, and PostgreSQL.
@@ -846,3 +847,17 @@ GROUP BY
     tweet_count
 ORDER BY
     tweet_bucket ASC;
+
+#StrataScratch
+1. 
+Write a query that returns the number of unique users per client per month.
+
+Table: fact_events
+
+SELECT client_id, 
+       MONTH(time_id) AS month, 
+       COUNT(DISTINCT user_id) AS users_num
+FROM fact_events
+GROUP BY 1, 2
+
+2.
