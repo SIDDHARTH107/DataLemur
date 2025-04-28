@@ -916,3 +916,18 @@ SELECT city,
        AVG(bedrooms) AS n_bedrooms_avg
 FROM airbnb_search_details
 GROUP BY 1, 2
+
+6.
+Count the number of user events performed by MacBookPro users.
+Output the result along with the event name.
+Sort the result based on the event count in the descending order.
+
+Table: playbook_events
+
+Company: Apple
+
+SELECT event_name, COUNT(user_id) AS event_count
+FROM playbook_events
+WHERE device = 'macbook pro'
+GROUP BY 1
+ORDER BY event_count DESC
