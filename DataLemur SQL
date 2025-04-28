@@ -931,3 +931,17 @@ FROM playbook_events
 WHERE device = 'macbook pro'
 GROUP BY 1
 ORDER BY event_count DESC
+
+7.
+Find the most profitable company from the financial sector. Output the result along with the continent.
+
+Table: forbes_global_2010_2014
+
+Company: Forbes
+
+SELECT company, continent
+FROM forbes_global_2010_2014
+WHERE sector = 'Financials'
+GROUP BY 1
+HAVING MAX(profits)
+LIMIT 1
