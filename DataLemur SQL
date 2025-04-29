@@ -945,3 +945,48 @@ WHERE sector = 'Financials'
 GROUP BY 1
 HAVING MAX(profits)
 LIMIT 1
+
+8.
+Find the inspection date and risk category (pe_description) of facilities named 'STREET CHURROS' that received a score below 95.
+
+Table: los_angeles_restaurant_health_inspections
+
+Company: City of Los Angeles
+
+SELECT activity_date, pe_description
+FROM los_angeles_restaurant_health_inspections
+WHERE facility_name = 'STREET CHURROS'
+  AND score < 95
+
+9.
+You are given a dataset of health inspections that includes details about violations. Each row represents an inspection, and if an inspection resulted in a violation, the violation_id column will contain a value.
+
+Count the total number of violations that occurred at 'Roxanne Cafe' for each year, based on the inspection date. Output the year and the corresponding number of violations in ascending order of the year.
+
+Table: sf_restaurant_health_violations
+
+Company: City of San Francisco
+
+SELECT YEAR(inspection_date) AS inspection_year, 
+       COUNT(violation_id) AS n_violations
+FROM sf_restaurant_health_violations
+WHERE business_name = 'Roxanne Cafe'
+GROUP BY 1
+ORDER BY inspection_year ASC
+
+10.
+Find the number of workers by department who joined on or after April 1, 2014.
+
+Output the department name along with the corresponding number of workers.
+
+Sort the results based on the number of workers in descending order.
+
+Table: Worker
+
+Company: Amazon
+
+SELECT department, COUNT(worker_id) AS num_workers
+FROM worker
+WHERE joining_date >= '2014-04-01'
+GROUP BY 1
+ORDER BY num_workers DESC
