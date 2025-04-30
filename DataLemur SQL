@@ -990,3 +990,15 @@ FROM worker
 WHERE joining_date >= '2014-04-01'
 GROUP BY 1
 ORDER BY num_workers DESC
+
+11.
+List all hotels along with their total number of reviews using the total_number_of_reviews column. Sort the results by total reviews in descending order.
+
+Table: hotel_reviews
+
+Company: Airbnb, Expedia, Amadeus
+
+SELECT hotel_name, total_number_of_reviews
+FROM hotel_reviews
+GROUP BY 1
+ORDER BY total_number_of_reviews DESC
