@@ -1019,3 +1019,23 @@ FROM customers c
 LEFT JOIN orders o ON o.cust_id = c.id
 ORDER BY c.first_name ASC,
          o.order_details ASC;
+
+13.
+Find order details made by Jill and Eva.
+Consider the Jill and Eva as first names of customers.
+Output the order date, details and cost along with the first name.
+Order records based on the customer id in ascending order.
+
+Tables: customers, orders
+
+Company: Shopify, Amazon
+
+SELECT c.first_name,
+       o.order_date,
+       o.order_details,
+       o.total_order_cost
+FROM customers c
+INNER JOIN orders o
+ON c.id = o.cust_id
+WHERE c.first_name = 'Jill'
+   OR c.first_name = 'Eva'
