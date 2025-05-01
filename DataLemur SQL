@@ -1039,3 +1039,26 @@ INNER JOIN orders o
 ON c.id = o.cust_id
 WHERE c.first_name = 'Jill'
    OR c.first_name = 'Eva'
+
+14.
+Compare each employee's salary with the average salary of the corresponding department.
+Output the department, first name, and salary of employees along with the average salary of that department.
+
+Table: employee
+
+Company: Glassdoor, Salesforce
+
+WITH mycte AS (
+SELECT department, AVG(salary) AS avg_salary
+FROM employee
+GROUP BY department
+)
+
+SELECT e.department, 
+       e.first_name,
+       e.salary,
+       m.avg_salary
+FROM employee AS e
+LEFT JOIN mycte AS m
+ON e.department = m.department
+ORDER BY e.department ASC
