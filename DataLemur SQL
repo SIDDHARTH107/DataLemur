@@ -1062,3 +1062,17 @@ FROM employee AS e
 LEFT JOIN mycte AS m
 ON e.department = m.department
 ORDER BY e.department ASC
+
+15.
+Find libraries from the 2016 circulation year that have no email address provided but have their notice preference set to email. In your solution, output their home library code.
+
+Table: library_usage
+
+Company: City of San Francisco
+
+SELECT home_library_code
+FROM library_usage
+WHERE circulation_active_year >= 2016
+  AND provided_email_address = 0
+  AND notice_preference_definition = 'email'
+GROUP BY 1
