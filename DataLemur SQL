@@ -1076,3 +1076,15 @@ WHERE circulation_active_year >= 2016
   AND provided_email_address = 0
   AND notice_preference_definition = 'email'
 GROUP BY 1
+
+16.
+Find the base pay for Police Captains.
+Output the employee name along with the corresponding base pay.
+
+Table: sf_public_salaries
+
+Company: City of San Francisco
+
+SELECT employeename, basepay
+FROM sf_public_salaries
+WHERE jobtitle LIKE '%POLICE%'
