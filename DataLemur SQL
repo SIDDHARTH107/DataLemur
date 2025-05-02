@@ -1102,3 +1102,18 @@ FROM spotify_worldwide_daily_song_ranking
 WHERE position = 1
 GROUP BY trackname
 ORDER BY times_top1 DESC
+
+18.
+Find how many times each artist appeared on the Spotify ranking list.
+Output the artist name along with the corresponding number of occurrences.
+Order records by the number of occurrences in descending order.
+
+Table: spotify_worldwide_daily_song_ranking
+
+Company: Spotify
+
+SELECT artist,
+       COUNT(artist) AS n_occurences
+FROM spotify_worldwide_daily_song_ranking
+GROUP BY 1
+ORDER BY n_occurences DESC
