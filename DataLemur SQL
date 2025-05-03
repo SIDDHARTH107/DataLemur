@@ -1145,3 +1145,21 @@ FROM facebook_employees AS fe
 INNER JOIN facebook_hack_survey AS fhs
 ON fe.id = fhs.employee_id
 GROUP BY 1
+
+21.
+Find all posts which were reacted to with a heart. For such posts output all columns from facebook_posts table.
+
+Table: facebook_reactions, facebook_posts
+
+Company: Meta
+
+SELECT fp.post_id,
+       fp.poster,
+       fp.post_text,
+       fp.post_keywords,
+       fp.post_date
+FROM facebook_reactions AS fr
+INNER JOIN facebook_posts AS fp
+ON fr.post_id = fp.post_id
+WHERE fr.reaction = 'heart'
+GROUP BY 1
