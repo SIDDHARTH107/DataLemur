@@ -1174,3 +1174,18 @@ Company: Google, Netflix
 SELECT COUNT(*) AS n_movies_by_abi
 FROM oscar_nominees
 WHERE nominee = 'Abigail Breslin'
+
+23.
+Find how many reviews exist for each review score given to 'Hotel Arena'. Output the hotel name ('Hotel Arena'), each review score, and the number of reviews for that score. Ensure the results only include 'Hotel Arena.'
+
+Table: hotel_reviews
+
+Company: Expedia, Airbnb
+
+SELECT hotel_name,
+       reviewer_score,
+       COUNT(reviewer_score) AS count
+FROM hotel_reviews
+WHERE hotel_name = 'Hotel Arena'
+GROUP BY 2
+
