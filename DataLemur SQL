@@ -1216,3 +1216,16 @@ SELECT id,
        MAX(salary) AS salary
 FROM ms_employee_salary
 GROUP BY 1
+
+26. Calculates the difference between the highest salaries in the marketing and engineering departments. Output just the absolute difference in salaries.
+
+Table: db_employee, db_dept
+
+Company: Linkedin, Dropbox
+
+SELECT ABS(MAX(CASE WHEN dbd.department = 'engineering' THEN dbe.salary END) - 
+          MAX(CASE WHEN dbd.department = 'marketing' THEN dbe.salary END)) 
+      AS salary_difference
+FROM db_employee AS dbe
+INNER JOIN db_dept AS dbd
+ON dbe.department_id = dbd.id
