@@ -1217,7 +1217,8 @@ SELECT id,
 FROM ms_employee_salary
 GROUP BY 1
 
-26. Calculates the difference between the highest salaries in the marketing and engineering departments. Output just the absolute difference in salaries.
+26. 
+Calculates the difference between the highest salaries in the marketing and engineering departments. Output just the absolute difference in salaries.
 
 Table: db_employee, db_dept
 
@@ -1229,3 +1230,22 @@ SELECT ABS(MAX(CASE WHEN dbd.department = 'engineering' THEN dbe.salary END) -
 FROM db_employee AS dbe
 INNER JOIN db_dept AS dbd
 ON dbe.department_id = dbd.id
+
+27. 
+Find the job titles of the employees with the highest salary. If multiple employees have the same highest salary, include the job titles for all such employees.
+
+Table: worker, title
+
+Company: Amazon, DoorDash
+
+WITH mycte AS 
+(SELECT t.worker_title, MAX(w.salary) AS best_paid_title
+FROM worker AS w
+INNER JOIN title AS t
+ON w.worker_id = t.worker_ref_id
+GROUP BY 1
+ORDER BY best_paid_title DESC)
+
+SELECT worker_title AS best_paid_title
+FROM mycte
+LIMIT 2
