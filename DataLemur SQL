@@ -1322,3 +1322,18 @@ FROM mycte
 WHERE denseranking = 2
 ORDER BY second_highest_salary DESC
 LIMIT 1
+
+# Stratascratch continued ...
+28.
+Write a query that returns the number of unique users per client per month.
+
+Table: fact_events
+
+Company: Apple, Dell, Microsoft
+
+SELECT client_id,
+       EXTRACT(month from time_id) as month,
+       count(DISTINCT user_id) as users_num
+FROM fact_events
+GROUP BY client_id,
+          EXTRACT(month from time_id)
