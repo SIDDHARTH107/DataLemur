@@ -2107,3 +2107,30 @@ The dataset you are querying against may have different input & output - this is
 
 SELECT ROUND(SUM(CASE WHEN call_category IS NULL OR call_category ILIKE 'n/a' THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 1) AS uncategorised_call_pct
 FROM callers
+
+# Stratascratch continued . . .
+
+28.
+Find the customers with the highest daily total order cost between 2019-02-01 and 2019-05-01. If a customer had more than one order on a certain day, sum the order costs on a daily basis. Output each customer's first name, total cost of their items, and the date.
+
+For simplicity, you can assume that every first name in the dataset is unique.
+
+Mode: Medium
+ID: 9915
+
+WITH mycte AS
+(
+SELECT c.first_name,
+       o.order_date, 
+       SUM(o.total_order_cost) AS max_cost
+FROM customers AS c
+INNER JOIN orders AS o
+ON c.id = o.cust_id
+GROUP BY 1, 2
+HAVING o.order_date BETWEEN '2019-04-19' AND '2019-04-19'
+)
+
+SELECT *
+FROM mycte
+ORDER BY max_cost DESC
+LIMIT 2
