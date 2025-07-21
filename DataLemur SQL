@@ -2117,6 +2117,7 @@ For simplicity, you can assume that every first name in the dataset is unique.
 
 Mode: Medium
 ID: 9915
+Company: Shopify, Amazon
 
 WITH mycte AS
 (
@@ -2134,3 +2135,30 @@ SELECT *
 FROM mycte
 ORDER BY max_cost DESC
 LIMIT 2
+
+29.
+Calculate the net change in the number of products launched by companies in 2020 compared to 2019. Your output should include the company names and the net difference.
+(Net difference = Number of products launched in 2020 - The number launched in 2019.)
+
+Mode: Medium
+ID: 10318
+Company: Tesla, Salesforce
+
+WITH mycte1 AS
+(SELECT company_name,
+        COUNT(product_name) AS total_launch_20
+FROM car_launches
+WHERE year = 2020
+GROUP BY 1),
+mycte2 AS 
+(SELECT company_name,
+        COUNT(product_name) AS total_launch_19
+FROM car_launches
+WHERE year = 2019
+GROUP BY 1)
+
+SELECT mycte1.company_name,
+       (total_launch_20 - total_launch_19) AS total_launch
+FROM mycte1 
+JOIN mycte2
+ON mycte1.company_name = mycte2.company_name
