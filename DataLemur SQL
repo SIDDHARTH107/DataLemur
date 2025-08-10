@@ -2184,3 +2184,46 @@ INNER JOIN amazon_transactions AS a
 ON m.user_id = a.user_id
 WHERE m.first_purchase <> a.created_at
   AND DATEDIFF(a.created_at, m.first_purchase) BETWEEN 1 AND 7;
+
+31.
+Calculate each user's average session time, where a session is defined as the time difference between a page_load and a page_exit. Assume each user has only one session per day. If there are multiple page_load or page_exit events on the same day, use only the latest page_load and the earliest page_exit, ensuring the page_load occurs before the page_exit. Output the user_id and their average session time.
+
+Mode: Medium
+ID: 10352
+Company: Meta
+
+WITH daily_loads AS (
+    SELECT 
+        user_id,
+        DATE(timestamp) AS session_date,
+        MAX(timestamp) AS latest_load
+    FROM facebook_web_log
+    WHERE action = 'page_load'
+    GROUP BY user_id, DATE(timestamp)
+),
+daily_exits AS (
+    SELECT 
+        user_id,
+        DATE(timestamp) AS session_date,
+        MIN(timestamp) AS earliest_exit
+    FROM facebook_web_log
+    WHERE action = 'page_exit'
+    GROUP BY user_id, DATE(timestamp)
+),
+valid_sessions AS (
+    SELECT
+        l.user_id,
+        l.session_date,
+        EXTRACT(EPOCH FROM (e.earliest_exit - l.latest_load)) AS session_duration
+    FROM daily_loads l
+    JOIN daily_exits e
+      ON l.user_id = e.user_id
+     AND l.session_date = e.session_date
+    WHERE l.latest_load < e.earliest_exit
+)
+SELECT
+    user_id,
+    AVG(session_duration) AS avg_session_duration
+FROM valid_sessions
+GROUP BY user_id
+ORDER BY user_id;
