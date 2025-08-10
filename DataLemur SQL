@@ -2162,3 +2162,25 @@ SELECT mycte1.company_name,
 FROM mycte1 
 JOIN mycte2
 ON mycte1.company_name = mycte2.company_name
+
+30.
+Identify returning active users by finding users who made a second purchase within 1 to 7 days after their first purchase. Ignore same-day purchases. Output a list of these user_ids.
+
+Mode: Medium
+ID: 10322
+Company: Amazon
+
+WITH mycte AS
+(
+SELECT user_id, 
+       MIN(created_at) AS first_purchase
+FROM amazon_transactions
+GROUP BY 1
+)
+
+SELECT DISTINCT a.user_id
+FROM mycte AS m
+INNER JOIN amazon_transactions AS a
+ON m.user_id = a.user_id
+WHERE m.first_purchase <> a.created_at
+  AND DATEDIFF(a.created_at, m.first_purchase) BETWEEN 1 AND 7;
