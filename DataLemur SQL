@@ -2227,3 +2227,31 @@ SELECT
 FROM valid_sessions
 GROUP BY user_id
 ORDER BY user_id;
+
+32.
+Calculate the friend acceptance rate for each date when friend requests were sent. A request is sent if action = sent and accepted if action = accepted. If a request is not accepted, there is no record of it being accepted in the table. The output will only include dates where requests were sent and at least one of them was accepted, as the acceptance rate can only be calculated for those dates. Show the results ordered from the earliest to the latest date.
+
+Mode: Medium
+ID: 10285
+Company: Meta
+
+WITH sent_requests AS (
+    SELECT user_id_sender, user_id_receiver, date AS sent_date
+    FROM fb_friend_requests
+    WHERE action = 'sent'
+),
+accepted_requests AS (
+    SELECT user_id_sender, user_id_receiver, date AS accepted_date
+    FROM fb_friend_requests
+    WHERE action = 'accepted'
+)
+SELECT
+    s.sent_date AS date,
+    COUNT(a.user_id_receiver)::decimal / COUNT(s.user_id_receiver) AS percentage_acceptance
+FROM sent_requests AS s
+LEFT JOIN accepted_requests AS a
+        ON s.user_id_sender = a.user_id_sender
+        AND s.user_id_receiver = a.user_id_receiver
+GROUP BY s.sent_date
+HAVING COUNT(a.user_id_receiver) > 0
+ORDER BY s.sent_date ASC;
