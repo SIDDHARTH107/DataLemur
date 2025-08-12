@@ -2255,3 +2255,31 @@ LEFT JOIN accepted_requests AS a
 GROUP BY s.sent_date
 HAVING COUNT(a.user_id_receiver) > 0
 ORDER BY s.sent_date ASC;
+
+33.
+Find the second highest salary of employees.
+
+Mode: Medium
+ID: 9892
+Company: Amazon, Dropbox
+
+SELECT DISTINCT salary
+FROM employee
+ORDER BY salary DESC
+LIMIT 1
+OFFSET 1
+
+OR
+
+SELECT MAX(salary) AS salary
+FROM employee
+WHERE salary < (SELECT MAX(salary) FROM employee);
+
+OR
+
+SELECT salary
+FROM (
+    SELECT salary, ROW_NUMBER() OVER (ORDER BY salary DESC) AS rn
+    FROM employee
+) t
+WHERE rn = 2;
