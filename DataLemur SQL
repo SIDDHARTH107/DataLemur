@@ -2283,3 +2283,18 @@ FROM (
     FROM employee
 ) t
 WHERE rn = 2;
+
+34.
+Find employees who are earning more than their managers. Output the employee's first name along with the corresponding salary.
+
+Mode: Medium
+ID: 9894
+Company: Walmart, Dropbox, Best Buy
+
+SELECT E.first_name,
+       E.salary
+FROM employee AS E
+JOIN employee AS M
+ON E.manager_id = M.id
+WHERE E.salary > M.salary
+ORDER BY E.salary DESC
