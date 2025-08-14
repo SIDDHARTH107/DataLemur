@@ -2298,3 +2298,26 @@ JOIN employee AS M
 ON E.manager_id = M.id
 WHERE E.salary > M.salary
 ORDER BY E.salary DESC
+
+35.
+Find the employee with the highest salary per department.
+Output the department name, employee's first name along with the corresponding salary.
+
+Mode: Medium
+ID: 9897
+Company: Asana, Twitter
+
+WITH temp AS 
+(
+SELECT RANK() OVER(PARTITION BY department ORDER BY salary DESC) AS ranking,
+       department,
+       first_name,
+       salary
+FROM employee
+)
+
+SELECT department,
+       first_name,
+       salary
+FROM temp
+WHERE ranking = 1
