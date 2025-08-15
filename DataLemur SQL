@@ -2411,3 +2411,21 @@ FROM yelp_business
 GROUP BY 1
 ORDER BY review_count DESC
 LIMIT 5
+
+41.
+Calculate number of reviews for every business category. Output the category along with the total number of reviews. Order by total reviews in descending order.
+
+Mode: Medium
+ID: 10049
+Company: Yelp
+
+WITH mycte AS
+  (SELECT unnest(string_to_array(categories, ';')) AS category,
+          review_count
+   FROM yelp_business)
+   
+SELECT category, 
+       SUM(review_count) AS review_cnt
+FROM mycte
+GROUP BY 1
+ORDER BY review_cnt DESC
