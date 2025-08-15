@@ -2397,3 +2397,17 @@ SELECT LOWER(regexp_split_to_table(regexp_replace(contents, '[^\w\s]', '', 'g'),
 FROM google_file_store
 GROUP BY 1
 ORDER BY occurrences DESC
+
+40.
+Find the top 5 businesses with most reviews. Assume that each row has a unique business_id such that the total reviews for each business is listed on each row. Output the business name along with the total number of reviews and order your results by the total reviews in descending order.
+
+Mode: Medium
+ID: 10048
+Company: Yelp
+
+SELECT name,
+       SUM(review_count) AS review_count
+FROM yelp_business
+GROUP BY 1
+ORDER BY review_count DESC
+LIMIT 5
