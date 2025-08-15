@@ -2429,3 +2429,24 @@ SELECT category,
 FROM mycte
 GROUP BY 1
 ORDER BY review_cnt DESC
+
+42.
+Find the review_text that received the highest number of  cool votes.
+Output the business name along with the review text with the highest number of cool votes.
+
+Mode: Medium
+ID: 10060
+Company: yelp_reviews
+
+WITH mycte AS 
+(SELECT business_name,
+       review_text,
+       SUM(cool)
+FROM yelp_reviews
+GROUP BY 1, 2
+ORDER BY SUM(cool) DESC)
+
+SELECT business_name,
+       review_text
+FROM mycte
+LIMIT 2
