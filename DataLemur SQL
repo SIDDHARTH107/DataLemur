@@ -2344,3 +2344,17 @@ SELECT user_id,
        total_emails,
        ROW_NUMBER() OVER (ORDER BY total_emails DESC, user_id ASC) AS activity_rank
 FROM mycte
+
+37.
+Find the Olympics with the highest number of unique athletes. The Olympics game is a combination of the year and the season, and is found in the games column. Output the Olympics along with the corresponding number of athletes. The id column uniquely identifies an athlete.
+
+Mode: Medium
+ID: 9942
+Company: ESPN
+
+SELECT games,
+       COUNT(DISTINCT id) AS athletes_count
+FROM olympics_athletes_events
+GROUP BY 1
+ORDER BY athletes_count DESC
+LIMIT 1
