@@ -2358,3 +2358,30 @@ FROM olympics_athletes_events
 GROUP BY 1
 ORDER BY athletes_count DESC
 LIMIT 1
+
+38.
+Identify the employee(s) working under manager manager_id=13 who have achieved the highest target. Return each such employee’s first name alongside the target value. The goal is to display the maximum target among all employees under manager_id=13 and show which employee(s) reached that top value.
+
+Mode: Medium
+ID: 9905
+Company: Salesforce
+
+WITH mycte AS
+(
+SELECT RANK() OVER(PARTITION BY department ORDER BY target DESC) AS ranking,
+       id,
+       first_name,
+       last_name,
+       salary,
+       target,
+       department,
+       manager_id
+FROM salesforce_employees
+WHERE manager_id = 13
+)
+
+SELECT first_name,
+       target
+FROM mycte
+WHERE ranking = 1
+
