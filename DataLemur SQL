@@ -2385,3 +2385,15 @@ SELECT first_name,
 FROM mycte
 WHERE ranking = 1
 
+39.
+Find the number of times each word appears in the contents column across all rows in the google_file_store dataset. Output two columns: word and occurrences.
+
+Mode: Medium
+ID: 9817
+Company: Google
+
+SELECT LOWER(regexp_split_to_table(regexp_replace(contents, '[^\w\s]', '', 'g'), '\s+')) AS word, 
+       COUNT(*) AS occurrences
+FROM google_file_store
+GROUP BY 1
+ORDER BY occurrences DESC
