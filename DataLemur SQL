@@ -2485,3 +2485,22 @@ INNER JOIN facebook_post_views AS fpv
 ON fp.post_id = fpv.post_id
 GROUP BY 1
 ORDER BY fp.post_date DESC
+
+45.
+Calculate the ratio of accounts closed on January 10th, 2020 using the fb_account_status table.
+
+Mode: Medium
+ID: 10296
+Company: Meta
+
+WITH mycte AS
+(
+SELECT status_date, 
+       CASE WHEN status LIKE 'closed' THEN 1 ELSE 0 END AS closed1,
+       CASE WHEN status LIKE 'open' THEN 1 ELSE 0 END AS opened1
+FROM fb_account_status
+WHERE status_date = '2020-01-10'
+)
+
+SELECT CAST(SUM(closed1) AS FLOAT) / NULLIF(SUM(closed1) + SUM(opened1), 0) AS closed_ratio
+FROM mycte;
