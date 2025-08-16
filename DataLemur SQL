@@ -2470,3 +2470,18 @@ INNER JOIN
    GROUP BY worker_ref_id) b ON e.id = b.worker_ref_id
 GROUP BY employee_title,
          sex
+
+44.
+Calculate the percentage of spam posts in all viewed posts by day. A post is considered a spam if a string "spam" is inside keywords of the post. Note that the facebook_posts table stores all posts posted by users. The facebook_post_views table is an action table denoting if a user has viewed a post.
+
+Mode: Medium
+ID: 10134
+Company: Meta
+
+SELECT fp.post_date, 
+       ROUND(100.0 * SUM(CASE WHEN fp.post_keywords ILIKE '%spam%' THEN 1 ELSE 0 END) / COUNT(*), 0) AS spam_share
+FROM facebook_posts AS fp
+INNER JOIN facebook_post_views AS fpv
+ON fp.post_id = fpv.post_id
+GROUP BY 1
+ORDER BY fp.post_date DESC
