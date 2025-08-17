@@ -2504,3 +2504,19 @@ WHERE status_date = '2020-01-10'
 
 SELECT CAST(SUM(closed1) AS FLOAT) / NULLIF(SUM(closed1) + SUM(opened1), 0) AS closed_ratio
 FROM mycte;
+
+46.
+Find matching hosts and guests pairs in a way that they are both of the same gender and nationality.
+Output the host id and the guest id of matched pair.
+
+Mode: Medium
+ID: 10078
+Company: Airbnb
+
+SELECT ah.host_id,
+       ag.guest_id
+FROM airbnb_hosts AS ah
+INNER JOIN airbnb_guests AS ag
+ON ah.gender = ag.gender
+AND ah.nationality = ag.nationality
+GROUP BY 1, 2
