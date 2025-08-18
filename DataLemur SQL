@@ -2533,3 +2533,18 @@ SELECT 100.0 * SUM(CASE WHEN c.address IS NOT NULL THEN 1 ELSE 0 END) / COUNT(o.
 FROM orders AS o
 INNER JOIN customers AS c
 ON o.cust_id = c.id
+
+48.
+Find the top 10 ranked songs in 2010. Output the rank, group name, and song name, but do not show the same song twice. Sort the result based on the rank in ascending order.
+
+Mode: Medium
+ID: 9650
+Company: Spotify
+
+SELECT year_rank, 
+       group_name,
+       song_name
+FROM billboard_top_100_year_end
+WHERE year = 2010
+GROUP BY 1, 2, 3
+LIMIT 10
