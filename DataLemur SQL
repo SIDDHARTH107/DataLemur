@@ -2579,3 +2579,24 @@ SELECT CASE WHEN number_of_reviews = 0 THEN 'New'
 FROM airbnb_host_searches
 GROUP BY 1
 ORDER BY min_price ASC
+
+50.
+For each video, find how many unique users flagged it. A unique user can be identified using the combination of their first name and last name. Do not consider rows in which there is no flag ID.
+
+Mode: Medium
+ID: 2102
+Company: Netflix, Google
+
+WITH mycte AS 
+(
+SELECT CONCAT(user_firstname,' ', user_lastname) AS name,
+       video_id,
+       flag_id
+FROM user_flags
+WHERE flag_id IS NOT NULL
+)
+
+SELECT video_id,
+       COUNT(DISTINCT name) AS num_unique_users
+FROM mycte
+GROUP BY 1
