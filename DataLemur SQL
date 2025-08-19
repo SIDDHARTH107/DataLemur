@@ -2600,3 +2600,17 @@ SELECT video_id,
        COUNT(DISTINCT name) AS num_unique_users
 FROM mycte
 GROUP BY 1
+
+51.
+Identify the IDs of students who scored exactly at the median for the SAT writing section.
+
+Mode: Medium
+ID: 9610
+Company: General Assembly, Kaplan, Google
+
+SELECT student_id 
+FROM sat_scores
+WHERE sat_writing = (
+    SELECT percentile_cont(0.5) within group (order by sat_writing) as writing_percentile 
+    FROM sat_scores
+)
