@@ -2774,3 +2774,19 @@ SELECT  DENSE_RANK() OVER(ORDER BY SUM(n_messages) DESC),
         SUM(n_messages)
 FROM airbnb_contacts
 GROUP BY id_guest;
+
+61.
+We have data on rental properties and their owners. Write a query that figures out how many different apartments (use unit_id) are owned by people under 30, broken down by their nationality. We want to see which nationality owns the most apartments, so make sure to sort the results accordingly.
+
+Mode: Medium
+ID: 10156
+Company: Airbnb
+
+SELECT ah.nationality, 
+       COUNT(DISTINCT au.unit_id) AS apartment_count
+FROM airbnb_hosts AS ah
+INNER JOIN airbnb_units AS au
+ON ah.host_id = au.host_id
+WHERE ah.age < 30
+  AND au.unit_type = 'Apartment'
+GROUP BY 1
