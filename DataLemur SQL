@@ -2682,3 +2682,13 @@ SELECT DISTINCT user_id
 FROM ordered_tx
 WHERE prev_tx_date IS NOT NULL
   AND tx_date - prev_tx_date <= 7;
+
+55.
+Calculate the percentage of users who are both from the US and have an 'open' status, as indicated in the fb_active_users table.
+
+Mode: Medium
+ID: 2005
+Company: Meta
+
+SELECT 100.0 * SUM(CASE WHEN status = 'open' AND country = 'USA' THEN 1 ELSE 0 END) / COUNT(*) AS us_active_share
+FROM fb_active_users
