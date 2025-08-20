@@ -2716,3 +2716,18 @@ GROUP BY a.title,
          a.start_date
 HAVING CEILING((a.end_date - a.start_date) * (SUM(c.salary) / 365)) > a.budget
 ORDER BY a.title ASC;
+
+57.
+Calculate the total revenue from each customer in March 2019. Include only customers who were active in March 2019. An active user is a customer who made at least one transaction in March 2019.
+Output the revenue along with the customer id and sort the results based on the revenue in descending order.
+
+Mode: Medium
+ID: 9782
+Company: Amazon, Meta
+
+SELECT cust_id,
+       SUM(total_order_cost) AS total_revenue
+FROM orders
+WHERE order_date BETWEEN '2019-03-01' AND '2019-03-31'
+GROUP BY 1
+ORDER BY total_revenue DESC
