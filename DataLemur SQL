@@ -2731,3 +2731,15 @@ FROM orders
 WHERE order_date BETWEEN '2019-03-01' AND '2019-03-31'
 GROUP BY 1
 ORDER BY total_revenue DESC
+
+58.
+Find the processed rate of tickets for each type. The processed rate is defined as the number of processed tickets divided by the total number of tickets for that type. Round this result to two decimal places.
+
+Mode: Medium
+ID: 9781
+Company: Meta
+
+SELECT type,
+       ROUND(SUM(CASE WHEN processed THEN 1 ELSE 0 END) :: NUMERIC / COUNT(*), 2) AS processed_rate
+FROM facebook_complaints
+GROUP BY 1
