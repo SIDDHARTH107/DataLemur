@@ -2854,3 +2854,26 @@ FROM playbook_users users
 INNER JOIN playbook_events EVENTS ON users.user_id = events.user_id
 GROUP BY users.language
 ORDER BY n_total_users DESC
+
+65.
+Identify customers who did not place an order between 2019-02-01 and 2019-03-01.
+
+Include:
+
+•    Customers who placed orders only outside this date range.
+•    Customers who never placed any orders.
+
+Output the customers' first names.
+
+Mode: Medium
+ID: 10142
+Company: Instacart, Amazon
+
+SELECT customers.first_name
+FROM customers
+WHERE customers.id NOT IN
+(
+SELECT orders.cust_id
+FROM orders
+WHERE order_date BETWEEN '2019-02-01' AND '2019-03-01'
+)
