@@ -2832,3 +2832,25 @@ SELECT survived,
        SUM(CASE WHEN pclass = 3 THEN 1 ELSE 0 END) AS third_class
 FROM titanic
 GROUP BY 1
+
+64.
+We’re analyzing user data to understand how popular Apple devices are among users who have performed at least one event on the platform. Specifically, we want to measure this popularity across different languages. Count the number of distinct users using Apple devices —limited to "macbook pro", "iphone 5s", and "ipad air" — and compare it to the total number of users per language.
+
+Present the results with the language, the number of Apple users, and the total number of users for each language. Finally, sort the results so that languages with the highest total user count appear first.
+
+Mode: Medium
+ID: 10141
+Company: Apple, Google
+
+SELECT users.language,
+       COUNT(DISTINCT CASE
+                           WHEN device IN ('macbook pro',
+                                           'iphone 5s',
+                                           'ipad air') THEN users.user_id
+                           ELSE NULL
+                       END) AS n_apple_users,
+             COUNT(DISTINCT users.user_id) AS n_total_users
+FROM playbook_users users
+INNER JOIN playbook_events EVENTS ON users.user_id = events.user_id
+GROUP BY users.language
+ORDER BY n_total_users DESC
