@@ -3115,3 +3115,35 @@ HAVING SUM(CASE WHEN transaction_type = 'purchase' THEN 1 ELSE 0 END) >= 3
    AND DATEDIFF(MAX(transaction_date), MIN(transaction_date)) >= 30
    AND 1.0 * SUM(CASE WHEN transaction_type = 'refund' THEN 1 ELSE 0 END) / COUNT(*) < 0.2
 ORDER BY customer_id;
+
+69.
+Find the best-selling item for each month (no need to separate months by year). The best-selling item is determined by the highest total sales amount, calculated as: total_paid = unitprice * quantity. Output the month, description of the item, and the total amount paid.
+
+ID: 10172
+Company: Ebay, Best Buy, Amazon
+Mode: Hard
+
+WITH monthly_item_totals AS (
+  SELECT 
+    TO_CHAR(invoicedate,'MM') AS month,         
+    description,
+    SUM(unitprice * quantity) AS total_paid
+  FROM online_retail
+  GROUP BY TO_CHAR(invoicedate,'MM'), description
+),
+ranked_items AS (
+  SELECT 
+    month,
+    description,
+    total_paid,
+    RANK() OVER (PARTITION BY month ORDER BY total_paid DESC) AS rnk
+  FROM monthly_item_totals
+)
+SELECT 
+  month,
+  description,
+  total_paid
+FROM ranked_items
+WHERE rnk = 1
+ORDER BY month;
+
