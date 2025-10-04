@@ -3166,3 +3166,31 @@ SELECT state, n_business
 FROM mycte
 WHERE rnk <= 5
 ORDER BY n_business DESC, state ASC
+
+71.
+Compare the total number of comments made by users in each country between December 2019 and January 2020. For each month, rank countries by total comments using dense ranking (i.e., avoid gaps between ranks) in descending order. Then, return the names of the countries whose rank improved from December to January.
+
+ID: 2007
+Company: Meta
+Mode: Hard
+
+WITH mycte AS
+(
+SELECT country, 
+       MONTH(created_at) AS mth,
+       COUNT(number_of_comments) AS cnt,
+       DENSE_RANK() OVER(PARTITION BY MONTH(created_at) ORDER BY COUNT(number_of_comments) DESC) AS drnk
+FROM fb_comments_count AS fcc
+INNER JOIN fb_active_users AS fau
+ON fcc.user_id = fau.user_id
+WHERE created_at BETWEEN '2019-12-01' AND '2020-01-31'
+GROUP BY country, mth
+)
+
+SELECT m.country
+FROM mycte AS m
+INNER JOIN mycte AS y
+ON m.country = y.country
+WHERE m.mth = 12 
+  AND y.mth = 1
+  AND y.drnk < m.drnk
