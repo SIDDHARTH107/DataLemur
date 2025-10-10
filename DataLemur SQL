@@ -3194,3 +3194,35 @@ ON m.country = y.country
 WHERE m.mth = 12 
   AND y.mth = 1
   AND y.drnk < m.drnk
+
+72.
+For the video (or videos) that received the most user flags, how many of these flags were reviewed by YouTube? Output the video ID and the corresponding number of reviewed flags.  Ignore flags that do not have a corresponding flag_id.
+
+ID: 2103
+Company: Google
+Mode: Hard
+
+WITH mycte AS
+(
+SELECT video_id, 
+       COUNT(*) AS total_flags
+FROM user_flags
+WHERE flag_id IS NOT NULL
+GROUP BY video_id
+ORDER BY total_flags DESC
+),
+mycte1 AS 
+(
+SELECT video_id
+FROM mycte
+WHERE total_flags = (SELECT MAX(total_flags) 
+                     FROM mycte)
+)
+SELECT u.video_id,
+       COUNT(*) 
+FROM user_flags u
+INNER JOIN flag_review f ON u.flag_id = f.flag_id
+INNER JOIN mycte1 c2 ON u.video_id = c2.video_id
+WHERE f.reviewed_by_yt = 'TRUE'
+GROUP BY u.video_id
+                     
