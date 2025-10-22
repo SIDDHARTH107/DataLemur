@@ -3291,4 +3291,26 @@ FROM Customer
 GROUP BY customer_id
 HAVING COUNT(DISTINCT product_key) = (SELECT COUNT(product_key)
                                       FROM Product)
+
+74.
+
+You're given a dataset of searches for properties on Airbnb. For simplicity, let's say that each search result (i.e., each row) represents a unique host. Find the city with the most amenities across all their host's properties. Output the name of the city.
                      
+Table: airbnb_search_details
+ID: 9633
+Company: Airbnb
+
+WITH mycte AS (
+SELECT city,
+       TRIM(BOTH '"' FROM UNNEST(STRING_TO_ARRAY(TRIM(BOTH '{}' FROM amenities), ','))) AS amenity
+FROM airbnb_search_details), 
+count_cte AS (
+SELECT city,
+       COUNT(amenity) AS cnt
+FROM mycte
+GROUP BY 1
+)
+SELECT city
+FROM count_cte
+ORDER BY cnt DESC
+LIMIT 1
