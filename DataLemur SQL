@@ -3314,3 +3314,23 @@ SELECT city
 FROM count_cte
 ORDER BY cnt DESC
 LIMIT 1
+
+75.
+Find the genre of the person with the most number of oscar winnings.
+If there are more than one person with the same number of oscar wins, return the first one in alphabetic order based on their name. Use the names as keys when joining the tables.
+
+Table: oscar_nominees, nominee_information
+ID: 10171
+
+WITH mycte AS 
+(SELECT ni.top_genre,
+       COUNT(CASE WHEN winner = TRUE THEN 1 ELSE 0 END) AS winlose
+FROM oscar_nominees AS ono
+INNER JOIN nominee_information AS ni
+ON ono.nominee = ni.name
+GROUP BY 1
+ORDER BY winlose DESC
+LIMIT 1
+)
+SELECT top_genre
+FROM mycte
