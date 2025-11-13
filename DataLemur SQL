@@ -3334,3 +3334,55 @@ LIMIT 1
 )
 SELECT top_genre
 FROM mycte
+
+76.
+You are given a table of tennis players and their matches that they could either win (W) or lose (L). Find the longest streak of wins. A streak is a set of consecutive won matches of one player. The streak ends once a player loses their next match. Output the ID of the player or players and the length of the streak.
+
+Table: players_results
+ID: 2059
+Companies: Google, Amazon
+
+WITH base AS (
+    SELECT
+        player_id,
+        match_date,
+        match_result,
+        CASE
+            WHEN match_result = 'W'
+             AND LAG(match_result) OVER (
+                    PARTITION BY player_id
+                    ORDER BY match_date
+                ) = 'W'
+            THEN 0
+            WHEN match_result = 'W' THEN 1
+            ELSE 0
+        END AS streak_start
+    FROM players_results
+),
+
+streaks AS (
+    SELECT
+        player_id,
+        match_date,
+        match_result,
+        SUM(streak_start) OVER (
+            PARTITION BY player_id
+            ORDER BY match_date
+        ) AS streak_group
+    FROM base
+),
+
+streak_counts AS (
+    SELECT
+        player_id,
+        streak_group,
+        COUNT(*) AS streak_len
+    FROM streaks
+    WHERE match_result = 'W'
+    GROUP BY player_id, streak_group
+)
+
+SELECT player_id, streak_len
+FROM streak_counts
+WHERE streak_len = (SELECT MAX(streak_len) FROM streak_counts)
+ORDER BY player_id;
