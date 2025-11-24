@@ -849,7 +849,7 @@ ORDER BY
     tweet_bucket ASC;
 
 #StrataScratch
-1. 
+21.
 Write a query that returns the number of unique users per client per month.
 
 Table: fact_events
@@ -862,7 +862,7 @@ SELECT client_id,
 FROM fact_events
 GROUP BY 1, 2
 
-2.
+22.
 Write a query that will calculate the number of shipments per month. The unique key for one shipment is a combination of shipment_id and sub_id. Output the year_month in format YYYY-MM and the number of shipments in that month.
 
 Table: amazon_shipment
@@ -874,7 +874,7 @@ SELECT COUNT(shipment_id),
 FROM amazon_shipment
 GROUP BY 2
 
-3.
+23.
 You have been asked to find the 5 most lucrative products in terms of total revenue for the first half of 2022 (from January to June inclusive).
 
 Output their IDs and the total revenue.
@@ -891,7 +891,7 @@ GROUP BY product_id
 ORDER BY revenue DESC
 LIMIT 5
 
-4.
+24.
 Find the number of employees working in the Admin department that joined in April or later.
 
 Table: worker
@@ -903,7 +903,7 @@ FROM worker
 WHERE department = 'Admin'
   AND MONTH(joining_date) >= 04
 
-5.
+25.
 Find the average number of bathrooms and bedrooms for each city’s property types. Output the result along with the city name and the property type.
 
 Table: airbnb_search_details
@@ -917,7 +917,7 @@ SELECT city,
 FROM airbnb_search_details
 GROUP BY 1, 2
 
-6.
+26.
 Count the number of user events performed by MacBookPro users.
 Output the result along with the event name.
 Sort the result based on the event count in the descending order.
@@ -932,7 +932,7 @@ WHERE device = 'macbook pro'
 GROUP BY 1
 ORDER BY event_count DESC
 
-7.
+27.
 Find the most profitable company from the financial sector. Output the result along with the continent.
 
 Table: forbes_global_2010_2014
@@ -946,7 +946,7 @@ GROUP BY 1
 HAVING MAX(profits)
 LIMIT 1
 
-8.
+28.
 Find the inspection date and risk category (pe_description) of facilities named 'STREET CHURROS' that received a score below 95.
 
 Table: los_angeles_restaurant_health_inspections
@@ -958,7 +958,7 @@ FROM los_angeles_restaurant_health_inspections
 WHERE facility_name = 'STREET CHURROS'
   AND score < 95
 
-9.
+29.
 You are given a dataset of health inspections that includes details about violations. Each row represents an inspection, and if an inspection resulted in a violation, the violation_id column will contain a value.
 
 Count the total number of violations that occurred at 'Roxanne Cafe' for each year, based on the inspection date. Output the year and the corresponding number of violations in ascending order of the year.
@@ -974,7 +974,7 @@ WHERE business_name = 'Roxanne Cafe'
 GROUP BY 1
 ORDER BY inspection_year ASC
 
-10.
+30.
 Find the number of workers by department who joined on or after April 1, 2014.
 
 Output the department name along with the corresponding number of workers.
@@ -991,7 +991,7 @@ WHERE joining_date >= '2014-04-01'
 GROUP BY 1
 ORDER BY num_workers DESC
 
-11.
+31.
 List all hotels along with their total number of reviews using the total_number_of_reviews column. Sort the results by total reviews in descending order.
 
 Table: hotel_reviews
@@ -1003,7 +1003,7 @@ FROM hotel_reviews
 GROUP BY 1
 ORDER BY total_number_of_reviews DESC
 
-12.
+32.
 Find the details of each customer regardless of whether the customer made an order. Output the customer's first name, last name, and the city along with the order details.
 Sort records based on the customer's first name and the order details in ascending order.
 
@@ -1020,7 +1020,7 @@ LEFT JOIN orders o ON o.cust_id = c.id
 ORDER BY c.first_name ASC,
          o.order_details ASC;
 
-13.
+33.
 Find order details made by Jill and Eva.
 Consider the Jill and Eva as first names of customers.
 Output the order date, details and cost along with the first name.
@@ -1040,7 +1040,7 @@ ON c.id = o.cust_id
 WHERE c.first_name = 'Jill'
    OR c.first_name = 'Eva'
 
-14.
+34.
 Compare each employee's salary with the average salary of the corresponding department.
 Output the department, first name, and salary of employees along with the average salary of that department.
 
@@ -1063,7 +1063,7 @@ LEFT JOIN mycte AS m
 ON e.department = m.department
 ORDER BY e.department ASC
 
-15.
+35.
 Find libraries from the 2016 circulation year that have no email address provided but have their notice preference set to email. In your solution, output their home library code.
 
 Table: library_usage
@@ -1077,7 +1077,7 @@ WHERE circulation_active_year >= 2016
   AND notice_preference_definition = 'email'
 GROUP BY 1
 
-16.
+36.
 Find the base pay for Police Captains.
 Output the employee name along with the corresponding base pay.
 
@@ -1089,7 +1089,7 @@ SELECT employeename, basepay
 FROM sf_public_salaries
 WHERE jobtitle LIKE '%POLICE%'
 
-17.
+37.
 Find songs that have ranked in the top position. Output the track name and the number of times it ranked at the top. Sort your records by the number of times the song was in the top position in descending order.
 
 Table: spotify_worldwide_daily_song_ranking
@@ -1103,7 +1103,7 @@ WHERE position = 1
 GROUP BY trackname
 ORDER BY times_top1 DESC
 
-18.
+38.
 Find how many times each artist appeared on the Spotify ranking list.
 Output the artist name along with the corresponding number of occurrences.
 Order records by the number of occurrences in descending order.
@@ -1118,7 +1118,7 @@ FROM spotify_worldwide_daily_song_ranking
 GROUP BY 1
 ORDER BY n_occurences DESC
 
-19.
+39.
 Find all Lyft drivers who earn either equal to or less than 30k USD or equal to or more than 70k USD.
 Output all details related to retrieved records.
 
@@ -1131,7 +1131,7 @@ FROM lyft_drivers
 WHERE yearly_salary <= 30000
    OR yearly_salary > 70000
 
-20.
+40.
 Meta/Facebook has developed a new programing language called Hack.To measure the popularity of Hack they ran a survey with their employees. The survey included data on previous programing familiarity as well as the number of years of experience, age, gender and most importantly satisfaction with Hack. Due to an error location data was not collected, but your supervisor demands a report showing average popularity of Hack by office location. Luckily the user IDs of employees completing the surveys were stored.
 Based on the above, find the average popularity of the Hack per office location.
 Output the location along with the average popularity.
@@ -1146,7 +1146,7 @@ INNER JOIN facebook_hack_survey AS fhs
 ON fe.id = fhs.employee_id
 GROUP BY 1
 
-21.
+41.
 Find all posts which were reacted to with a heart. For such posts output all columns from facebook_posts table.
 
 Table: facebook_reactions, facebook_posts
@@ -1164,7 +1164,7 @@ ON fr.post_id = fp.post_id
 WHERE fr.reaction = 'heart'
 GROUP BY 1
 
-22.
+42.
 Count the number of movies for which Abigail Breslin was nominated for an Oscar.
 
 Table: oscar_nominees
@@ -1175,7 +1175,7 @@ SELECT COUNT(*) AS n_movies_by_abi
 FROM oscar_nominees
 WHERE nominee = 'Abigail Breslin'
 
-23.
+43.
 Find how many reviews exist for each review score given to 'Hotel Arena'. Output the hotel name ('Hotel Arena'), each review score, and the number of reviews for that score. Ensure the results only include 'Hotel Arena.'
 
 Table: hotel_reviews
@@ -1189,7 +1189,7 @@ FROM hotel_reviews
 WHERE hotel_name = 'Hotel Arena'
 GROUP BY 2
 
-24.
+44.
 Find the last time each bike was in use. Output both the bike number and the date-timestamp of the bike's last use (i.e., the date-time the bike was returned). Order the results by bikes that were most recently used.
 
 Table: dc_bikeshare_q1_2012
@@ -1202,7 +1202,7 @@ FROM dc_bikeshare_q1_2012
 GROUP BY bike_number
 ORDER BY last_used DESC
 
-25.
+45.
 We have a table with employees and their salaries, however, some of the records are old and contain outdated salary information. Find the current salary of each employee assuming that salaries increase each year. Output their id, first name, last name, department ID, and current salary. Order your list by employee ID in ascending order.
 
 Table: ms_employee_salary
@@ -1217,7 +1217,7 @@ SELECT id,
 FROM ms_employee_salary
 GROUP BY 1
 
-26. 
+46. 
 Calculates the difference between the highest salaries in the marketing and engineering departments. Output just the absolute difference in salaries.
 
 Table: db_employee, db_dept
@@ -1231,7 +1231,7 @@ FROM db_employee AS dbe
 INNER JOIN db_dept AS dbd
 ON dbe.department_id = dbd.id
 
-27. 
+47. 
 Find the job titles of the employees with the highest salary. If multiple employees have the same highest salary, include the job titles for all such employees.
 
 Table: worker, title
@@ -1251,7 +1251,7 @@ FROM mycte
 LIMIT 2
 
 # Datalemur Continued ...
-21.
+48.
 
 Assume you are given the table below on Uber transactions made by users. Write a query to obtain the third transaction of every user. Output the user id, spend and transaction date.
 
@@ -1285,7 +1285,7 @@ SELECT user_id,
 FROM mycte
 WHERE ranking = 3
 
-22.
+49.
 
 Imagine you're an HR analyst at a tech company tasked with analyzing employee salaries. Your manager is keen on understanding the pay distribution and asks you to determine the second highest salary among all employees.
 
@@ -1324,7 +1324,7 @@ ORDER BY second_highest_salary DESC
 LIMIT 1
 
 # Stratascratch continued ...
-28.
+50.
 Write a query that returns the number of unique users per client per month.
 
 Table: fact_events
@@ -1338,7 +1338,7 @@ FROM fact_events
 GROUP BY client_id,
           EXTRACT(month from time_id)
 
-29.
+51.
 Write a query that will calculate the number of shipments per month. The unique key for one shipment is a combination of shipment_id and sub_id. Output the year_month in format YYYY-MM and the number of shipments in that month.
 
 Table: amazon_shipment
@@ -1350,7 +1350,7 @@ SELECT TO_CHAR(shipment_date, 'YYYY-MM') AS year_month,
 FROM amazon_shipment
 GROUP BY 1
 
-30.
+52.
 You have been asked to find the 5 most lucrative products in terms of total revenue for the first half of 2022 (from January to June inclusive).
 
 Output their IDs and the total revenue.
@@ -1373,7 +1373,7 @@ SELECT product_id,
 FROM cte
 WHERE rnk <= 5;
 
-31.
+53.
 Find the average number of bathrooms and bedrooms for each city’s property types. Output the result along with the city name and the property type.
 
 Table: airbnb_search_details
@@ -1388,7 +1388,7 @@ FROM airbnb_search_details
 GROUP BY city,
          property_type
 
-32.
+54.
 Count the number of user events performed by MacBookPro users.
 Output the result along with the event name.
 Sort the result based on the event count in the descending order.
@@ -1406,7 +1406,7 @@ ORDER BY event_count DESC
 
 # Datalemur continued ...
 
-23.
+55.
 Assume you're given tables with information on Snapchat users, including their ages and time spent sending and opening snaps.
 
 Write a query to obtain a breakdown of the time spent sending vs. opening snaps as a percentage of total time spent on these activities grouped by age group. Round the percentage to 2 decimal places in the output.
@@ -1470,7 +1470,7 @@ ON a.user_id = ab.user_id
 WHERE a.activity_type IN ('send', 'open')
 GROUP BY ab.age_bucket;
 
-24.
+56.
 Given a table of tweet data over a specified time period, calculate the 3-day rolling average of tweets for each user. Output the user ID, tweet date, and rolling averages rounded to 2 decimal places.
 
 Notes:
@@ -1507,7 +1507,7 @@ SELECT user_id,
        ROUND(AVG(tweet_count) OVER(PARTITION BY user_id ORDER BY tweet_date ROWS BETWEEN 2 PRECEDING AND CURRENT ROW), 2) AS rolling_avg_3rd
 FROM tweets
 
-25.
+57.
 Assume you're given a table containing data on Amazon customers and their spending on products in different category, write a query to identify the top two highest-grossing products within each category in the year 2022. The output should include the category, product, and total spend.
 
 product_spend Table:
@@ -1559,7 +1559,7 @@ FROM mycte
 WHERE ranking <= 2
 ORDER BY category ASC
 
-26.
+58.
 As part of an ongoing analysis of salary distribution within the company, your manager has requested a report identifying high earners in each department. A 'high earner' within a department is defined as an employee with a salary ranking among the top three salaries within that department.
 
 You're tasked with identifying these high earners across all departments. Write a query to display the employee's name along with their department name and salary. In case of duplicates, sort the results of department name in ascending order, then by salary in descending order. If multiple employees have the same salary, then order them alphabetically.
@@ -1629,7 +1629,7 @@ SELECT department_name,
 FROM mycte
 WHERE ranking <= 3
 
-27.
+59.
 New TikTok users sign up with their emails. They confirmed their signup by replying to the text confirmation to activate their accounts. Users may receive multiple text messages for account confirmation until they have confirmed their new account.
 
 A senior analyst is interested to know the activation rate of specified users in the emails table. Write a query to find the activation rate. Round the percentage to 2 decimal places.
@@ -1689,7 +1689,7 @@ AND signup_action = 'Confirmed'
 SELECT ROUND(SUM(activation_count)::DECIMAL / COUNT(user_id), 2) AS activation_rate
 FROM mycte;
 
-28.
+60.
 A Microsoft Azure Supercloud customer is defined as a customer who has purchased at least one product from every product category listed in the products table.
 
 Write a query that identifies the customer IDs of these Supercloud customers.
@@ -1749,7 +1749,7 @@ FROM temp1
 WHERE product_count = (SELECT cnt
                        FROM temp2)
 
-29.
+61.
 Assume you're given a table with measurement values obtained from a Google sensor over multiple days with measurements taken multiple times within each day.
 
 Write a query to calculate the sum of odd-numbered and even-numbered measurements separately for a particular day and display the results in two different columns. Refer to the Example Output below for the desired format.
@@ -1798,7 +1798,7 @@ FROM mycte
 GROUP BY DATE(measurement_time)
 ORDER BY DATE(measurement_time) ASC
 
-30.
+62.
 The Bloomberg terminal is the go-to resource for financial professionals, offering convenient access to a wide array of financial datasets. As a Data Analyst at Bloomberg, you have access to historical data on stock performance.
 
 Currently, you're analyzing the highest and lowest open prices for each FAANG stock by month over the years.
@@ -1862,7 +1862,7 @@ FROM
 ORDER BY
   e.ticker;
 
-31.
+63.
 In an effort to identify high-value customers, Amazon asked for your help to obtain data about users who go on shopping sprees. A shopping spree occurs when a user makes purchases on 3 or more consecutive days.
 
 List the user IDs who have gone on at least 1 shopping spree in ascending order.
@@ -1901,7 +1901,7 @@ FROM (
 WHERE lag_trans_date IS NOT NULL 
   AND lead_trans_date IS NOT NULL
 
-32.
+64.
 Assume you're given a table on Walmart user transactions. Based on their most recent transaction date, write a query that retrieve the users along with the number of products they bought.
 
 Output the user's most recent transaction date, user ID, and the number of products, sorted in chronological order by the transaction date.
@@ -1942,7 +1942,7 @@ FROM mycte
 WHERE rnk = 1
 GROUP BY transaction_date, user_id
 
-33.
+65.
 You're given a table containing the item count for each order on Alibaba, along with the frequency of orders that have the same item count. Write a query to retrieve the mode of the order occurrences. Additionally, if there are multiple item counts with the same mode, the results should be sorted in ascending order.
 
 Clarifications:
@@ -1981,7 +1981,7 @@ FROM items_per_order
 WHERE order_occurrences = (SELECT max_val FROM max_occurrence)
 ORDER BY item_count;
 
-34.
+66.
 Your team at JPMorgan Chase is soon launching a new credit card. You are asked to estimate how many cards you'll issue in the first month.
 
 Before you can answer this question, you want to first get some perspective on how well new credit card launches typically do in their first month.
@@ -2014,7 +2014,7 @@ FROM monthly_cards_issued
 GROUP BY 1
 ORDER BY issued_amount DESC
 
-35.
+67.
 A phone call is considered an international call when the person calling is in a different country than the person receiving the call.
 
 What percentage of phone calls are international? Round the result to 1 decimal.
@@ -2074,7 +2074,7 @@ JOIN phone_info AS receiver
 SELECT ROUND(SUM(CASE WHEN caller_country != receiver_country THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 1) AS international_calls_pct
 FROM mycte
 
-36.
+68.
 UnitedHealth Group (UHG) has a program called Advocate4Me, which allows policy holders (or, members) to call an advocate and receive support for their health care needs – whether that's claims and benefits support, drug coverage, pre- and post-authorisation, medical records, emergency assistance, or member portal services.
 
 Calls to the Advocate4Me call centre are classified into various categories, but some calls cannot be neatly categorised. These uncategorised calls are labeled as “n/a”, or are left empty when the support agent does not enter anything into the call category field.
@@ -2110,7 +2110,7 @@ FROM callers
 
 # Stratascratch continued . . .
 
-28.
+69.
 Find the customers with the highest daily total order cost between 2019-02-01 and 2019-05-01. If a customer had more than one order on a certain day, sum the order costs on a daily basis. Output each customer's first name, total cost of their items, and the date.
 
 For simplicity, you can assume that every first name in the dataset is unique.
@@ -2136,7 +2136,7 @@ FROM mycte
 ORDER BY max_cost DESC
 LIMIT 2
 
-29.
+70.
 Calculate the net change in the number of products launched by companies in 2020 compared to 2019. Your output should include the company names and the net difference.
 (Net difference = Number of products launched in 2020 - The number launched in 2019.)
 
@@ -2163,7 +2163,7 @@ FROM mycte1
 JOIN mycte2
 ON mycte1.company_name = mycte2.company_name
 
-30.
+71.
 Identify returning active users by finding users who made a second purchase within 1 to 7 days after their first purchase. Ignore same-day purchases. Output a list of these user_ids.
 
 Mode: Medium
@@ -2185,7 +2185,7 @@ ON m.user_id = a.user_id
 WHERE m.first_purchase <> a.created_at
   AND DATEDIFF(a.created_at, m.first_purchase) BETWEEN 1 AND 7;
 
-31.
+72.
 Calculate each user's average session time, where a session is defined as the time difference between a page_load and a page_exit. Assume each user has only one session per day. If there are multiple page_load or page_exit events on the same day, use only the latest page_load and the earliest page_exit, ensuring the page_load occurs before the page_exit. Output the user_id and their average session time.
 
 Mode: Medium
@@ -2228,7 +2228,7 @@ FROM valid_sessions
 GROUP BY user_id
 ORDER BY user_id;
 
-32.
+73.
 Calculate the friend acceptance rate for each date when friend requests were sent. A request is sent if action = sent and accepted if action = accepted. If a request is not accepted, there is no record of it being accepted in the table. The output will only include dates where requests were sent and at least one of them was accepted, as the acceptance rate can only be calculated for those dates. Show the results ordered from the earliest to the latest date.
 
 Mode: Medium
@@ -2256,7 +2256,7 @@ GROUP BY s.sent_date
 HAVING COUNT(a.user_id_receiver) > 0
 ORDER BY s.sent_date ASC;
 
-33.
+74.
 Find the second highest salary of employees.
 
 Mode: Medium
@@ -2284,7 +2284,7 @@ FROM (
 ) t
 WHERE rn = 2;
 
-34.
+75.
 Find employees who are earning more than their managers. Output the employee's first name along with the corresponding salary.
 
 Mode: Medium
@@ -2299,7 +2299,7 @@ ON E.manager_id = M.id
 WHERE E.salary > M.salary
 ORDER BY E.salary DESC
 
-35.
+76.
 Find the employee with the highest salary per department.
 Output the department name, employee's first name along with the corresponding salary.
 
@@ -2322,7 +2322,7 @@ SELECT department,
 FROM temp
 WHERE ranking = 1
 
-36.
+77.
 Find the email activity rank for each user. Email activity rank is defined by the total number of emails sent. The user with the highest number of emails sent will have a rank of 1, and so on. Output the user, total emails, and their activity rank.
 
 
@@ -2345,7 +2345,7 @@ SELECT user_id,
        ROW_NUMBER() OVER (ORDER BY total_emails DESC, user_id ASC) AS activity_rank
 FROM mycte
 
-37.
+78.
 Find the Olympics with the highest number of unique athletes. The Olympics game is a combination of the year and the season, and is found in the games column. Output the Olympics along with the corresponding number of athletes. The id column uniquely identifies an athlete.
 
 Mode: Medium
@@ -2359,7 +2359,7 @@ GROUP BY 1
 ORDER BY athletes_count DESC
 LIMIT 1
 
-38.
+79.
 Identify the employee(s) working under manager manager_id=13 who have achieved the highest target. Return each such employee’s first name alongside the target value. The goal is to display the maximum target among all employees under manager_id=13 and show which employee(s) reached that top value.
 
 Mode: Medium
@@ -2385,7 +2385,7 @@ SELECT first_name,
 FROM mycte
 WHERE ranking = 1
 
-39.
+80.
 Find the number of times each word appears in the contents column across all rows in the google_file_store dataset. Output two columns: word and occurrences.
 
 Mode: Medium
@@ -2398,7 +2398,7 @@ FROM google_file_store
 GROUP BY 1
 ORDER BY occurrences DESC
 
-40.
+81.
 Find the top 5 businesses with most reviews. Assume that each row has a unique business_id such that the total reviews for each business is listed on each row. Output the business name along with the total number of reviews and order your results by the total reviews in descending order.
 
 Mode: Medium
@@ -2412,7 +2412,7 @@ GROUP BY 1
 ORDER BY review_count DESC
 LIMIT 5
 
-41.
+82.
 Calculate number of reviews for every business category. Output the category along with the total number of reviews. Order by total reviews in descending order.
 
 Mode: Medium
@@ -2430,7 +2430,7 @@ FROM mycte
 GROUP BY 1
 ORDER BY review_cnt DESC
 
-42.
+83.
 Find the review_text that received the highest number of  cool votes.
 Output the business name along with the review text with the highest number of cool votes.
 
@@ -2451,7 +2451,7 @@ SELECT business_name,
 FROM mycte
 LIMIT 2
 
-43.
+84.
 Find the average total compensation based on employee titles and gender. Total compensation is calculated by adding both the salary and bonus of each employee. However, not every employee receives a bonus so disregard employees without bonuses in your calculation. Employee can receive more than one bonus.
 Output the employee title, gender (i.e., sex), along with the average total compensation.
 
@@ -2471,7 +2471,7 @@ INNER JOIN
 GROUP BY employee_title,
          sex
 
-44.
+85.
 Calculate the percentage of spam posts in all viewed posts by day. A post is considered a spam if a string "spam" is inside keywords of the post. Note that the facebook_posts table stores all posts posted by users. The facebook_post_views table is an action table denoting if a user has viewed a post.
 
 Mode: Medium
@@ -2486,7 +2486,7 @@ ON fp.post_id = fpv.post_id
 GROUP BY 1
 ORDER BY fp.post_date DESC
 
-45.
+86.
 Calculate the ratio of accounts closed on January 10th, 2020 using the fb_account_status table.
 
 Mode: Medium
@@ -2505,7 +2505,7 @@ WHERE status_date = '2020-01-10'
 SELECT CAST(SUM(closed1) AS FLOAT) / NULLIF(SUM(closed1) + SUM(opened1), 0) AS closed_ratio
 FROM mycte;
 
-46.
+87.
 Find matching hosts and guests pairs in a way that they are both of the same gender and nationality.
 Output the host id and the guest id of matched pair.
 
@@ -2521,7 +2521,7 @@ ON ah.gender = ag.gender
 AND ah.nationality = ag.nationality
 GROUP BY 1, 2
 
-47.
+88.
 Find the percentage of shipable orders.
 Consider an order is shipable if the customer's address is known.
 
@@ -2534,7 +2534,7 @@ FROM orders AS o
 INNER JOIN customers AS c
 ON o.cust_id = c.id
 
-48.
+89.
 Find the top 10 ranked songs in 2010. Output the rank, group name, and song name, but do not show the same song twice. Sort the result based on the rank in ascending order.
 
 Mode: Medium
@@ -2549,7 +2549,7 @@ WHERE year = 2010
 GROUP BY 1, 2, 3
 LIMIT 10
 
-49.
+90.
 You are given a table named airbnb_host_searches that contains data for rental property searches made by users. Determine the minimum, average, and maximum rental prices for each popularity-rating bucket. A popularity-rating bucket should be assigned to every record based on its number_of_reviews (see rules below).
 
 The host’s popularity rating is defined as below:
@@ -2580,7 +2580,7 @@ FROM airbnb_host_searches
 GROUP BY 1
 ORDER BY min_price ASC
 
-50.
+91.
 For each video, find how many unique users flagged it. A unique user can be identified using the combination of their first name and last name. Do not consider rows in which there is no flag ID.
 
 Mode: Medium
@@ -2601,7 +2601,7 @@ SELECT video_id,
 FROM mycte
 GROUP BY 1
 
-51.
+92.
 Identify the IDs of students who scored exactly at the median for the SAT writing section.
 
 Mode: Medium
@@ -2615,7 +2615,7 @@ WHERE sat_writing = (
     FROM sat_scores
 )
 
-52.
+93.
 Which user flagged the most distinct videos that ended up approved by YouTube? Output, in one column, their full name or names in case of a tie. In the user's full name, include a space between the first and the last name.
 
 Mode: Medium
@@ -2638,7 +2638,7 @@ LIMIT 2
 SELECT username
 FROM mycte
 
-53.
+94.
 The election is conducted in a city and everyone can vote for one or more candidates, or choose not to vote at all. Each person has 1 vote so if they vote for multiple candidates, their vote gets equally split across these candidates. For example, if a person votes for 2 candidates, these candidates receive an equivalent of 0.5 vote each. Some voters have chosen not to vote, which explains the blank entries in the dataset.
 
 Find out who got the most votes and won the election. Output the name of the candidate or multiple names in case of a tie.
@@ -2662,7 +2662,7 @@ FROM mycte
 ORDER BY cnt ASC
 LIMIT 1
 
-54.
+95.
 Identify returning active users by finding users who made a second purchase within 7 days of any previous purchase. Output a list of these user_id.
 
 Mode: Medium
@@ -2683,7 +2683,7 @@ FROM ordered_tx
 WHERE prev_tx_date IS NOT NULL
   AND tx_date - prev_tx_date <= 7;
 
-55.
+96.
 Calculate the percentage of users who are both from the US and have an 'open' status, as indicated in the fb_active_users table.
 
 Mode: Medium
@@ -2693,7 +2693,7 @@ Company: Meta
 SELECT 100.0 * SUM(CASE WHEN status = 'open' AND country = 'USA' THEN 1 ELSE 0 END) / COUNT(*) AS us_active_share
 FROM fb_active_users
 
-56.
+97.
 You are given a set of projects and employee data. Each project has a name, a budget, and a specific duration, while each employee has an annual salary and may be assigned to one or more projects for particular periods. The task is to identify which projects are overbudget. A project is considered overbudget if the prorated cost of all employees assigned to it exceeds the project’s budget.
 
 To solve this, you must prorate each employee's annual salary based on the exact period they work on a given project, relative to a full year. For example, if an employee works on a six-month project, only half of their annual salary should be attributed to that project. Sum these prorated salary amounts for all employees assigned to a project and compare the total with the project’s budget.
@@ -2717,7 +2717,7 @@ GROUP BY a.title,
 HAVING CEILING((a.end_date - a.start_date) * (SUM(c.salary) / 365)) > a.budget
 ORDER BY a.title ASC;
 
-57.
+98.
 Calculate the total revenue from each customer in March 2019. Include only customers who were active in March 2019. An active user is a customer who made at least one transaction in March 2019.
 Output the revenue along with the customer id and sort the results based on the revenue in descending order.
 
@@ -2732,7 +2732,7 @@ WHERE order_date BETWEEN '2019-03-01' AND '2019-03-31'
 GROUP BY 1
 ORDER BY total_revenue DESC
 
-58.
+99.
 Find the processed rate of tickets for each type. The processed rate is defined as the number of processed tickets divided by the total number of tickets for that type. Round this result to two decimal places.
 
 Mode: Medium
@@ -2744,7 +2744,7 @@ SELECT type,
 FROM facebook_complaints
 GROUP BY 1
 
-59.
+100.
 Count the number of unique street names for each postal code in the business dataset. Use only the first word of the street name, case insensitive (e.g., "FOLSOM" and "Folsom" are the same). If the structure is reversed (e.g., "Pier 39" and "39 Pier"), count them as the same street. Output the results with postal codes, ordered by the number of streets (descending) and postal code (ascending).
 
 Mode: Medium
@@ -2762,7 +2762,7 @@ GROUP BY business_postal_code
 ORDER BY n_streets DESC,
          business_postal_code ASC
 
-60.
+101.
 Identify the most engaged guests by ranking them according to their overall messaging activity. The most active guest, meaning the one who has exchanged the most messages with hosts, should have the highest rank. If two or more guests have the same number of messages, they should have the same rank. Importantly, the ranking shouldn't skip any numbers, even if many guests share the same rank. Present your results in a clear format, showing the rank, guest identifier, and total number of messages for each guest, ordered from the most to least active.
 
 Mode: Medium
@@ -2775,7 +2775,7 @@ SELECT  DENSE_RANK() OVER(ORDER BY SUM(n_messages) DESC),
 FROM airbnb_contacts
 GROUP BY id_guest;
 
-61.
+102.
 We have data on rental properties and their owners. Write a query that figures out how many different apartments (use unit_id) are owned by people under 30, broken down by their nationality. We want to see which nationality owns the most apartments, so make sure to sort the results accordingly.
 
 Mode: Medium
@@ -2791,7 +2791,7 @@ WHERE ah.age < 30
   AND au.unit_type = 'Apartment'
 GROUP BY 1
 
-62.
+103.
 Find the total number of downloads for paying and non-paying users by date. Include only records where non-paying customers have more downloads than paying customers. The output should be sorted by earliest date first and contain 3 columns date, non-paying downloads, paying downloads. Hint: In Oracle you should use "date" when referring to date column (reserved keyword).
 
 Mode: Medium
@@ -2813,7 +2813,7 @@ FROM mycte
 WHERE non_paying > paying
 ORDER BY date ASC
 
-63.
+104.
 Make a report showing the number of survivors and non-survivors by passenger class. Classes are categorized based on the pclass value as:
 
 •	First class: pclass = 1
@@ -2833,7 +2833,7 @@ SELECT survived,
 FROM titanic
 GROUP BY 1
 
-64.
+105.
 We’re analyzing user data to understand how popular Apple devices are among users who have performed at least one event on the platform. Specifically, we want to measure this popularity across different languages. Count the number of distinct users using Apple devices —limited to "macbook pro", "iphone 5s", and "ipad air" — and compare it to the total number of users per language.
 
 Present the results with the language, the number of Apple users, and the total number of users for each language. Finally, sort the results so that languages with the highest total user count appear first.
@@ -2855,7 +2855,7 @@ INNER JOIN playbook_events EVENTS ON users.user_id = events.user_id
 GROUP BY users.language
 ORDER BY n_total_users DESC
 
-65.
+106.
 Identify customers who did not place an order between 2019-02-01 and 2019-03-01.
 
 Include:
@@ -2878,7 +2878,7 @@ FROM orders
 WHERE order_date BETWEEN '2019-02-01' AND '2019-03-01'
 )
 
-66.
+107.
 Table: Users
 
 +----------------+---------+
@@ -2924,8 +2924,6 @@ Write a solution to find for each user, the join date and the number of orders t
 Return the result table in any order.
 
 The result format is in the following example.
-
- 
 
 Example 1:
 
@@ -2978,7 +2976,7 @@ FROM Users AS u
 LEFT JOIN Orders AS o ON (u.user_id = o.buyer_id AND YEAR(o.order_date) = '2019')
 GROUP BY 1
 
-67.
+108.
 Table: transactions
 
 +------------------+------+
@@ -3046,7 +3044,7 @@ FROM transactions
 GROUP BY 1
 ORDER BY transaction_date ASC
 
-68.
+109.
 Table: customer_transactions
 
 +------------------+---------+
@@ -3116,7 +3114,7 @@ HAVING SUM(CASE WHEN transaction_type = 'purchase' THEN 1 ELSE 0 END) >= 3
    AND 1.0 * SUM(CASE WHEN transaction_type = 'refund' THEN 1 ELSE 0 END) / COUNT(*) < 0.2
 ORDER BY customer_id;
 
-69.
+110.
 Find the best-selling item for each month (no need to separate months by year). The best-selling item is determined by the highest total sales amount, calculated as: total_paid = unitprice * quantity. Output the month, description of the item, and the total amount paid.
 
 ID: 10172
@@ -3147,7 +3145,7 @@ FROM ranked_items
 WHERE rnk = 1
 ORDER BY month;
 
-70.
+111.
 Find the top 5 states with the most 5 star businesses. Output the state name along with the number of 5-star businesses and order records by the number of 5-star businesses in descending order. In case there are ties in the number of businesses, return all the unique states. If two states have the same result, sort them in alphabetical order.
 
 ID: 10046
@@ -3167,7 +3165,7 @@ FROM mycte
 WHERE rnk <= 5
 ORDER BY n_business DESC, state ASC
 
-71.
+112.
 Compare the total number of comments made by users in each country between December 2019 and January 2020. For each month, rank countries by total comments using dense ranking (i.e., avoid gaps between ranks) in descending order. Then, return the names of the countries whose rank improved from December to January.
 
 ID: 2007
@@ -3195,7 +3193,7 @@ WHERE m.mth = 12
   AND y.mth = 1
   AND y.drnk < m.drnk
 
-72.
+113.
 For the video (or videos) that received the most user flags, how many of these flags were reviewed by YouTube? Output the video ID and the corresponding number of reviewed flags.  Ignore flags that do not have a corresponding flag_id.
 
 ID: 2103
@@ -3226,7 +3224,7 @@ INNER JOIN mycte1 c2 ON u.video_id = c2.video_id
 WHERE f.reviewed_by_yt = 'TRUE'
 GROUP BY u.video_id
 
-73.
+114.
 Table: Customer
 
 +-------------+---------+
@@ -3292,7 +3290,7 @@ GROUP BY customer_id
 HAVING COUNT(DISTINCT product_key) = (SELECT COUNT(product_key)
                                       FROM Product)
 
-74.
+115.
 
 You're given a dataset of searches for properties on Airbnb. For simplicity, let's say that each search result (i.e., each row) represents a unique host. Find the city with the most amenities across all their host's properties. Output the name of the city.
                      
@@ -3315,7 +3313,7 @@ FROM count_cte
 ORDER BY cnt DESC
 LIMIT 1
 
-75.
+116.
 Find the genre of the person with the most number of oscar winnings.
 If there are more than one person with the same number of oscar wins, return the first one in alphabetic order based on their name. Use the names as keys when joining the tables.
 
@@ -3335,7 +3333,7 @@ LIMIT 1
 SELECT top_genre
 FROM mycte
 
-76.
+117.
 You are given a table of tennis players and their matches that they could either win (W) or lose (L). Find the longest streak of wins. A streak is a set of consecutive won matches of one player. The streak ends once a player loses their next match. Output the ID of the player or players and the length of the streak.
 
 Table: players_results
@@ -3387,7 +3385,7 @@ FROM streak_counts
 WHERE streak_len = (SELECT MAX(streak_len) FROM streak_counts)
 ORDER BY player_id;
 
-77.
+118.
 Table: Samples
 
 +----------------+---------+
@@ -3490,3 +3488,34 @@ SELECT sample_id,
        CASE WHEN dna_sequence LIKE '%ATAT%' THEN 1 ELSE 0 END AS has_atat,
        CASE WHEN dna_sequence LIKE '%GGG%' THEN 1 ELSE 0 END AS has_ggg
 FROM Samples
+
+119.
+Find the number of times the exact words bull and bear appear in the contents column.
+
+Count all occurrences, even if they appear multiple times within the same row. Matches should be case-insensitive and only count exact words, that is, exclude substrings like bullish or bearing.
+
+Output the word (bull or bear) and the corresponding number of occurrences.
+
+ID: 9814
+Company: Google
+Table: google_file_store
+
+WITH bull AS (
+SELECT filename, contents
+FROM google_file_store
+WHERE contents LIKE '%bull%'
+),
+bear AS (
+SELECT filename, contents
+FROM google_file_store
+WHERE contents LIKE '%bear%'
+)
+SELECT 'bull' AS word,
+       COUNT(*) AS nentry
+FROM bull
+
+UNION ALL 
+
+SELECT 'bear' AS word,
+       COUNT(*) AS nentry
+FROM bear
