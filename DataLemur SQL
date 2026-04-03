@@ -3519,3 +3519,23 @@ UNION ALL
 SELECT 'bear' AS word,
        COUNT(*) AS nentry
 FROM bear
+
+120.
+
+Find all posts which were reacted to with a heart. For such posts output all columns from facebook_posts table.
+
+Mode: Easy
+ID: 10087
+Company: Meta
+Tables: facebook_reactions, facebook_posts
+
+SELECT fp.post_id,
+       fp.poster,
+       fp.post_text,
+       fp.post_keywords,
+       fp.post_date
+FROM facebook_posts AS fp
+INNER JOIN facebook_reactions AS fr
+ON fp.post_id = fr.post_id
+WHERE fr.reaction ILIKE 'heart'
+GROUP BY 1,2,3,4,5
