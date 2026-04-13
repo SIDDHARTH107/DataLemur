@@ -3605,3 +3605,28 @@ FROM (
 ) x
 WHERE rnk = 1;
 
+124.
+
+Compare each employee's salary with the average salary of the corresponding department.
+Output the department, first name, and salary of employees along with the average salary of that department.
+
+Mode: Easy
+ID: 9917
+Companies: Salesforce, Glassdoor
+Table: employee
+
+WITH mycte AS (
+SELECT department, AVG(salary) AS avg_salary
+FROM employee
+GROUP BY department
+)
+
+SELECT e.department, 
+       e.first_name,
+       e.salary,
+       m.avg_salary
+FROM employee e
+JOIN mycte m
+ON e.department = m.department
+ORDER BY e.department ASC
+
