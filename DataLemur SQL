@@ -3630,3 +3630,16 @@ JOIN mycte m
 ON e.department = m.department
 ORDER BY e.department ASC
 
+125.
+
+What is the total sales revenue of Samantha and Lisa?
+
+Mode: Easy
+ID: 10127
+Companies: Salesforce, Amazon, Groupon
+Table: sales_performance
+
+SELECT SUM(sales_revenue) AS total_revenue
+FROM sales_performance
+WHERE salesperson LIKE 'Samantha'
+   OR salesperson LIKE 'Lisa'
