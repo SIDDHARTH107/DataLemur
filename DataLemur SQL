@@ -3643,3 +3643,18 @@ SELECT SUM(sales_revenue) AS total_revenue
 FROM sales_performance
 WHERE salesperson LIKE 'Samantha'
    OR salesperson LIKE 'Lisa'
+
+126.
+
+Find wine varieties tasted by 'Roger Voss' and with a value in the 'region_1' column of the dataset. Output unique variety names only.
+
+Mode: Easy
+ID: 10024
+Company: Wine Magazine
+Table: winemag_p2
+
+SELECT DISTINCT variety
+FROM winemag_p2
+WHERE region_1 IS NOT NULL
+  AND taster_name LIKE 'Roger Voss'
+
