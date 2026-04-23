@@ -3673,3 +3673,17 @@ WHERE gasoline_cost = (
     SELECT MAX(gasoline_cost) AS max_cost 
     FROM lyft_rides
 )
+
+128.
+
+Find all Lyft rides which happened on rainy days before noon.
+
+Mode: Easy
+ID: 10004
+Company: Lyft
+Table: lyft_rides
+
+SELECT *
+FROM lyft_rides
+WHERE weather = 'rainy'
+  AND hour BETWEEN 0 AND 11
