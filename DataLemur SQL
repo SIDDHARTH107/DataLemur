@@ -3844,3 +3844,16 @@ SELECT *
 FROM worker
 WHERE LENGTH(first_name) = 6
   AND first_name LIKE '%h'
+
+138.
+
+Find drafts which contains the word 'optimism'.
+
+Mode: Easy
+ID: 9805
+Company: Google
+
+SELECT *
+FROM google_file_store
+WHERE contents LIKE '%optimism%'
+  AND filename LIKE '%draft%'
