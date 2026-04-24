@@ -3702,3 +3702,19 @@ SELECT *
 FROM lyft_drivers
 WHERE yearly_salary <= 30000
    OR yearly_salary >= 70000
+
+130.
+
+Find how many times each artist appeared on the Spotify ranking list.
+Output the artist name along with the corresponding number of occurrences.
+Order records by the number of occurrences in descending order.
+
+Mode: Easy
+ID: 9992
+Company: Spotify
+Table: spotify_worldwide_daily_song_ranking
+
+SELECT artist, COUNT(*) AS n_occurences
+FROM spotify_worldwide_daily_song_ranking
+GROUP BY 1
+ORDER BY n_occurences DESC
