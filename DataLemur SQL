@@ -3852,8 +3852,27 @@ Find drafts which contains the word 'optimism'.
 Mode: Easy
 ID: 9805
 Company: Google
+Table: google_file_store
 
 SELECT *
 FROM google_file_store
 WHERE contents LIKE '%optimism%'
   AND filename LIKE '%draft%'
+
+139.
+
+You are given a dataset of health inspections that includes details about violations. Each row represents an inspection, and if an inspection resulted in a violation, the violation_id column will contain a value.
+
+Count the total number of violations that occurred at 'Roxanne Cafe' for each year, based on the inspection date. Output the year and the corresponding number of violations in ascending order of the year.
+
+Mode: Easy
+ID: 9728
+Company: City of San Francisco
+Table: sf_restaurant_health_violations
+
+SELECT EXTRACT(YEAR FROM inspection_date) AS inspection_year,
+       COUNT(violation_id) AS n_violations
+FROM sf_restaurant_health_violations
+WHERE violation_id IS NOT NULL
+  AND business_name LIKE 'Roxanne Cafe'
+GROUP BY 1
