@@ -3738,3 +3738,23 @@ SELECT trackname, COUNT(*) AS times_top1
 FROM mycte
 GROUP BY 1
 ORDER BY times_top1 DESC
+
+132.
+
+Find the lowest, average, and the highest ages of athletes across all Olympics. HINT: If an athlete participated in more than one discipline at one Olympic games, consider it as a separate athlete, no need to remove such edge cases.
+
+Mode: Easy
+ID: 9943
+Company: ESPN
+Table: olympics_athletes_events
+
+WITH mycte1 AS (
+SELECT age
+FROM olympics_athletes_events
+WHERE age IS NOT NULL
+)
+
+SELECT MIN(age) AS lowest_age,
+       AVG(age) AS mean_age,
+       MAX(age) AS highest_age
+FROM mycte1
