@@ -3718,3 +3718,23 @@ SELECT artist, COUNT(*) AS n_occurences
 FROM spotify_worldwide_daily_song_ranking
 GROUP BY 1
 ORDER BY n_occurences DESC
+
+131.
+
+Find songs that have ranked in the top position. Output the track name and the number of times it ranked at the top. Sort your records by the number of times the song was in the top position in descending order.
+
+Mode: Easy
+ID: 9991
+Company: Spotify
+Table: spotify_worldwide_daily_song_ranking
+
+WITH mycte AS (
+SELECT trackname
+FROM spotify_worldwide_daily_song_ranking
+WHERE position = 1
+)
+
+SELECT trackname, COUNT(*) AS times_top1
+FROM mycte
+GROUP BY 1
+ORDER BY times_top1 DESC
