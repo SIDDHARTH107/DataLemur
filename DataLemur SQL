@@ -3876,3 +3876,16 @@ FROM sf_restaurant_health_violations
 WHERE violation_id IS NOT NULL
   AND business_name LIKE 'Roxanne Cafe'
 GROUP BY 1
+
+140.
+
+Find all inspection details made for facilities owned by 'GLASSELL COFFEE SHOP LLC'.
+
+Mode: Easy
+ID: 9689
+Company: City of Los Angeles
+Table: los_angeles_restaurant_health_inspections
+
+SELECT * 
+FROM los_angeles_restaurant_health_inspections
+WHERE owner_name LIKE 'GLASSELL COFFEE SHOP LLC'
