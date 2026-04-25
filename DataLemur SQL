@@ -4016,3 +4016,15 @@ SELECT client_id,
 FROM fact_events
 GROUP BY client_id,
           EXTRACT(month from time_id)
+
+149.
+
+Calculate the percentage of users who are both from the US and have an 'open' status, as indicated in the fb_active_users table.
+
+Mode: Medium
+ID: 2005
+Company: Meta
+Table: fb_active_users
+
+SELECT ROUND(SUM(CASE WHEN country = 'USA' AND status = 'open' THEN 1 ELSE 0 END) * 100.0 / COUNT(user_id), 2) AS us_active_share
+FROM fb_active_users
