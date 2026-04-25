@@ -4044,3 +4044,17 @@ SELECT dn.number AS number1,
        GREATEST(dn.number, nd.number) AS max_number
 FROM deloitte_numbers AS dn
 CROSS JOIN deloitte_numbers AS nd
+
+151.
+
+For each video, find how many unique users flagged it. A unique user can be identified using the combination of their first name and last name. Do not consider rows in which there is no flag ID.
+
+Mode: Medium
+ID: 2102
+Company: Google, Netflix
+Table: user_flags
+
+SELECT video_id, COUNT(DISTINCT CONCAT(user_firstname, ' ', user_lastname)) AS num_unique_users
+FROM user_flags
+WHERE flag_id IS NOT NULL
+GROUP BY 1
