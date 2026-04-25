@@ -4000,3 +4000,19 @@ SELECT TO_CHAR(shipment_date, 'YYYY-MM') AS year_month,
        COUNT(DISTINCT (shipment_id, sub_id))
 FROM amazon_shipment
 GROUP BY 1
+
+148.
+
+Write a query that returns the number of unique users per client for each month. Assume all events occur within the same year, so only month needs to be be in the output as a number from 1 to 12.
+
+Mode: Easy
+ID: 2024
+Companies: Microsoft, Apple, Dell
+Table: fact_events
+
+SELECT client_id,
+       EXTRACT(month from time_id) as month,
+       count(DISTINCT user_id) as users_num
+FROM fact_events
+GROUP BY client_id,
+          EXTRACT(month from time_id)
