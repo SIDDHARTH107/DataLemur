@@ -3919,3 +3919,23 @@ SELECT company,
 FROM forbes_global_2010_2014
 WHERE sector LIKE 'Financials'
 LIMIT 1
+
+143.
+
+Count the number of user events performed by MacBookPro users.
+Output the result along with the event name.
+Sort the result based on the event count in the descending order.
+
+Mode: Easy
+ID: 9653
+Company: Apple
+Table: playbook_events
+
+SELECT
+    event_name,
+    COUNT(*) AS event_count
+FROM playbook_events
+WHERE device = 'macbook pro'
+GROUP BY event_name
+ORDER BY event_count DESC
+
