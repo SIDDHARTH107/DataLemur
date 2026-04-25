@@ -3939,3 +3939,15 @@ WHERE device = 'macbook pro'
 GROUP BY event_name
 ORDER BY event_count DESC
 
+144.
+
+The data quality team is auditing employee records to assess the completeness of contact information. Calculate and return the ratio of employees who have a NULL phone number.
+
+Mode: Easy
+ID: 2169
+Company: Salesforce, Amazon, Shopify
+Table: techcorp_workforce
+
+SELECT 
+    ROUND(AVG(CASE WHEN phone_number IS NULL OR phone_number = '' THEN 1.0 ELSE 0 END), 2) AS null_phone_ratio
+FROM techcorp_workforce;
