@@ -3904,3 +3904,18 @@ SELECT activity_date,
 FROM los_angeles_restaurant_health_inspections
 WHERE facility_name LIKE 'STREET CHURROS'
   AND score < 95
+
+142.
+
+Find the most profitable company from the financial sector. Output the result along with the continent.
+
+Mode: Easy
+ID: 9663
+Company: Forbes
+Table: forbes_global_2010_2014
+
+SELECT company,
+       continent
+FROM forbes_global_2010_2014
+WHERE sector LIKE 'Financials'
+LIMIT 1
