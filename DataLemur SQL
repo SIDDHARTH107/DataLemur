@@ -3889,3 +3889,18 @@ Table: los_angeles_restaurant_health_inspections
 SELECT * 
 FROM los_angeles_restaurant_health_inspections
 WHERE owner_name LIKE 'GLASSELL COFFEE SHOP LLC'
+
+141.
+
+Find the inspection date and risk category (pe_description) of facilities named 'STREET CHURROS' that received a score below 95.
+
+Mode: Easy
+ID: 9688
+Company: City of Los Angeles
+Table: los_angeles_restaurant_health_inspections
+
+SELECT activity_date, 
+       pe_description
+FROM los_angeles_restaurant_health_inspections
+WHERE facility_name LIKE 'STREET CHURROS'
+  AND score < 95
