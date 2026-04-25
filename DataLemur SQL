@@ -4028,3 +4028,19 @@ Table: fb_active_users
 
 SELECT ROUND(SUM(CASE WHEN country = 'USA' AND status = 'open' THEN 1 ELSE 0 END) * 100.0 / COUNT(user_id), 2) AS us_active_share
 FROM fb_active_users
+
+150.
+
+Given a single column of numbers, consider all possible permutations of two numbers with replacement, assuming that pairs of numbers (x,y) and (y,x) are two different permutations. Then, for each permutation, find the maximum of the two numbers.
+Output three columns: the first number, the second number, and the maximum of the two.
+
+Mode: Medium
+ID: 2101
+Company: Deloitte
+Table: deloitte_numbers
+
+SELECT dn.number AS number1,
+       nd.number AS number2,
+       GREATEST(dn.number, nd.number) AS max_number
+FROM deloitte_numbers AS dn
+CROSS JOIN deloitte_numbers AS nd
