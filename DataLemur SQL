@@ -4076,3 +4076,40 @@ JOIN dim_employee managers ON h.manager_empl_id = managers.empl_id
 JOIN dim_employee employees ON h.empl_id = employees.empl_id
 GROUP BY 1,2
 HAVING managers.salary < 2 * AVG(employees.salary)
+
+153.
+
+The workforce planning team is analyzing department growth since the company's expansion, focusing on teams that have grown substantially.
+
+For each department with 5 or more employees hired after 2020, return the name, headcount, total payroll, and average salary.
+
+Mode: Medium
+ID: 2170
+Companies: Google, Microsoft, Oracle
+Table: techcorp_workforce
+
+WITH mycte AS (
+SELECT department,
+       COUNT(*) AS cnt, 
+       SUM(salary) AS total_payroll,
+       AVG(salary) AS avg_salary
+FROM techcorp_workforce
+WHERE EXTRACT(YEAR FROM joining_date) > 2020
+GROUP BY 1
+)
+
+SELECT *
+FROM mycte
+WHERE cnt > 5
+
+OR
+
+SELECT
+    department,
+    COUNT(*) AS headcount,
+    SUM(salary) AS total_payroll,
+    AVG(salary) AS avg_salary
+FROM techcorp_workforce
+WHERE joining_date > '2020-12-31'
+GROUP BY department
+HAVING COUNT(*) >= 5
