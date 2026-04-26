@@ -4113,3 +4113,20 @@ FROM techcorp_workforce
 WHERE joining_date > '2020-12-31'
 GROUP BY department
 HAVING COUNT(*) >= 5
+
+154.
+
+The marketing team wants to identify high-value customers for a premium loyalty program. Find all customers who have placed at least one order over $100. Return customer ID and name.
+
+Mode: Medium
+ID: 2172
+Companies: Uber, Netflix, DoorDash
+Tables: online_store_customers, online_store_orders
+
+SELECT DISTINCT osc.customer_id,
+       osc.customer_name
+FROM online_store_customers AS osc
+INNER JOIN online_store_orders AS oso
+ON osc.customer_id = oso.customer_id
+WHERE amount > 100
+ORDER BY osc.customer_id ASC
