@@ -4130,3 +4130,20 @@ INNER JOIN online_store_orders AS oso
 ON osc.customer_id = oso.customer_id
 WHERE amount > 100
 ORDER BY osc.customer_id ASC
+
+155.
+
+Find the top 10 ranked songs in 2010. Output the rank, group name, and song name, but do not show the same song twice. Sort the result based on the rank in ascending order.
+
+Mode: Medium
+ID: 9650
+Companies: Spotify
+Table: billboard_top_100_year_end
+
+SELECT DISTINCT year_rank, 
+       group_name,
+       song_name
+FROM billboard_top_100_year_end
+WHERE year = '2010'
+ORDER BY year_rank ASC
+LIMIT 10
