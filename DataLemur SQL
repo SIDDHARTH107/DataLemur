@@ -4167,3 +4167,23 @@ SELECT type,
        ROUND(SUM(CASE WHEN processed THEN 1 ELSE 0 END) :: NUMERIC / COUNT(*), 2) AS processed_rate
 FROM facebook_complaints
 GROUP BY 1
+
+157.
+
+Make the friend network symmetric.
+For example, if 0 and 1 are friends, have the output contain both 0 and 1 under 1 and 0, respectively.
+
+Mode: Medium
+ID: 9813
+Company: Google
+Table: google_friends_network
+
+SELECT user_id,
+       friend_id
+FROM google_friends_network
+
+UNION
+
+SELECT friend_id AS user_id,
+       user_id AS friend_id
+FROM google_friends_network
