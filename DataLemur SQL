@@ -4147,3 +4147,23 @@ FROM billboard_top_100_year_end
 WHERE year = '2010'
 ORDER BY year_rank ASC
 LIMIT 10
+
+156.
+
+Find the processed rate of tickets for each type. The processed rate is defined as the number of processed tickets divided by the total number of tickets for that type. Round this result to two decimal places.
+
+Mode: Medium
+ID: 9781
+Company: Meta
+Table: facebook_complaints
+
+SELECT type,
+       ROUND(SUM(CASE WHEN processed THEN 1 ELSE 0 END) :: NUMERIC / COUNT(*), 2) AS processed_rate
+FROM facebook_complaints
+GROUP BY 1
+
+
+SELECT type,
+       ROUND(SUM(CASE WHEN processed THEN 1 ELSE 0 END) :: NUMERIC / COUNT(*), 2) AS processed_rate
+FROM facebook_complaints
+GROUP BY 1
