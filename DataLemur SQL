@@ -4203,3 +4203,28 @@ SELECT LOWER(regexp_split_to_table(regexp_replace(contents, '[^\w\s]', '', 'g'),
 FROM google_file_store
 GROUP BY 1
 ORDER BY occurrences DESC
+
+159.
+
+Find employees who earn the same salary. Output the worker id along with the first name and the salary in descending order.
+
+Mode: Medium
+ID: 9856
+Company: Amazon
+Table: worker
+
+WITH mycte AS
+(
+SELECT salary, COUNT(*)
+FROM worker
+GROUP BY 1
+HAVING COUNT(*) > 1
+)
+
+SELECT w.worker_id,
+       w.first_name,
+       w.salary
+FROM worker AS w
+JOIN mycte AS m
+ON w.salary = m.salary
+ORDER BY w.salary DESC
