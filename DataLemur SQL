@@ -4228,3 +4228,24 @@ FROM worker AS w
 JOIN mycte AS m
 ON w.salary = m.salary
 ORDER BY w.salary DESC
+
+160.
+
+Generate a list of employees who work in the HR department, including only their first names and department in the output. Each employee should appear twice in the list, meaning their first name and department should be duplicated in the output.
+
+Mode: Medium
+ID: 9858
+Company: Amazon
+Table: worker
+
+SELECT first_name, 
+       department
+FROM worker
+WHERE department = 'HR'
+
+UNION ALL
+
+SELECT first_name, 
+       department
+FROM worker
+WHERE department = 'HR'
