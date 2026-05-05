@@ -4271,3 +4271,18 @@ SELECT survived,
        SUM(CASE WHEN pclass = 3 THEN 1 ELSE 0 END) AS third_class
 FROM titanic
 GROUP BY 1
+
+162.
+
+Find the second highest salary of employees.
+
+Mode: Medium
+ID: 9892
+Companies: Amazon, Dropbox
+Table: employee
+
+SELECT salary
+FROM employee
+ORDER BY salary DESC
+OFFSET 1
+LIMIT 1
