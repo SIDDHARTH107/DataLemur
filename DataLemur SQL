@@ -4274,7 +4274,7 @@ GROUP BY 1
 
 162.
 
-Find the second highest salary of employees.
+Find the second-highest salary of employees.
 
 Mode: Medium
 ID: 9892
@@ -4285,4 +4285,21 @@ SELECT salary
 FROM employee
 ORDER BY salary DESC
 OFFSET 1
+LIMIT 1
+
+163.
+
+Find employees who are earning more than their managers. Output the employee's first name along with the corresponding salary.
+
+Mode: Medium
+ID: 9894
+Companies: Walmart, Dropbox, Best Buy
+Table: employee
+
+SELECT e.first_name, 
+       e.salary
+FROM employee AS e
+JOIN employee AS m
+ON e.manager_id = m.id
+WHERE e.salary > m.salary
 LIMIT 1
