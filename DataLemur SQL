@@ -4303,3 +4303,24 @@ JOIN employee AS m
 ON e.manager_id = m.id
 WHERE e.salary > m.salary
 LIMIT 1
+
+164.
+
+Find the employee with the highest salary per department.
+Output the department name, employee's first name along with the corresponding salary.
+
+Mode: Medium
+ID: 9897
+Companies: Twitter, Asana
+Table: employee
+
+WITH mycte AS (
+SELECT *,
+       RANK() OVER(PARTITION BY department ORDER BY salary DESC) AS rnk
+FROM employee
+)
+SELECT department, 
+       first_name,
+       salary
+FROM mycte
+WHERE rnk = 1
