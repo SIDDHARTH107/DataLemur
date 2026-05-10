@@ -4348,3 +4348,25 @@ SELECT first_name,
        target
 FROM mycte 
 WHERE rnk = 1
+
+166.
+
+Find all possible varieties which occur in either of the winemag datasets.
+Output unique variety values only.
+Sort records based on the variety in ascending order.
+
+Mode: Medium
+ID: 10025
+Company: Wine Magazine
+Tables: winemag_p1, winemag_p2
+
+WITH mycte AS (
+SELECT variety
+FROM winemag_p1
+UNION ALL
+SELECT variety
+FROM winemag_p2
+)
+SELECT DISTINCT variety
+FROM mycte
+ORDER BY variety ASC
