@@ -4382,3 +4382,9 @@ ID: 10048
 Company: Yelp
 Table: yelp_business
 
+SELECT name,
+       SUM(review_count) AS review_count
+FROM yelp_business
+GROUP BY 1
+ORDER BY review_count DESC
+LIMIT 5
