@@ -4433,3 +4433,33 @@ LIMIT 2
 SELECT business_name, 
        review_text
 FROM mycte
+
+170.
+
+Find the average total compensation based on employee titles and gender. Total compensation is calculated by adding both the salary and bonus of each employee. However, not every employee receives a bonus so disregard employees without bonuses in your calculation. Employee can receive more than one bonus.
+Output the employee title, gender (i.e., sex), along with the average total compensation.
+
+Mode: Medium
+ID: 10077
+Company: City of San Francisco
+Tables: sf_employee, sf_bonus
+
+WITH bonus_agg AS (
+    SELECT worker_ref_id,
+           SUM(bonus) AS total_bonus
+    FROM sf_bonus
+    GROUP BY worker_ref_id
+),
+mycte AS (
+    SELECT sfe.employee_title,
+           sfe.sex,
+           (sfe.salary + ba.total_bonus) AS compensation
+    FROM sf_employee AS sfe
+    INNER JOIN bonus_agg AS ba
+        ON sfe.id = ba.worker_ref_id
+)
+SELECT employee_title,
+       sex,
+       AVG(compensation) AS avg_compensation
+FROM mycte
+GROUP BY 1, 2;
