@@ -4498,3 +4498,18 @@ ON fe.location = fem.location
 AND fe.age <> fem.age
 AND fe.gender = fem.gender
 AND fe.is_senior <> fem.is_senior
+
+173.
+
+Find the percentage of shipable orders.
+Consider an order is shipable if the customer's address is known.
+
+Mode: Medium
+ID: 10090
+Companies: Google, Amazon
+Tables: orders, customers
+
+SELECT ROUND(SUM(CASE WHEN address IS NOT NULL THEN 1 ELSE 0 END) * 100.0 / COUNT(*), 2) AS percent_shipable
+FROM orders AS o
+JOIN customers AS c
+ON o.cust_id = c.id
