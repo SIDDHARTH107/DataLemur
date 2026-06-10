@@ -4556,3 +4556,6 @@ GROUP BY
     inspection_type
 ORDER BY
     total_inspections DESC
+
+175.
+
