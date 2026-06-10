@@ -4559,3 +4559,18 @@ ORDER BY
 
 175.
 
+Write a query that returns how many different apartment-type units (counted by distinct unit_id) are owned by people under 30, grouped by their nationality. Sort the results by the number of apartments in descending order.
+
+Mode: Medium
+ID: 10156
+Companies: Airbnb
+Tables: airbnb_hosts, airbnb_units
+
+SELECT ah.nationality, 
+       COUNT(DISTINCT au.unit_id) AS apartment_count
+FROM airbnb_hosts AS ah
+INNER JOIN airbnb_units AS au
+ON ah.host_id = au.host_id
+WHERE ah.age < 30
+  AND au.unit_type = 'Apartment'
+GROUP BY 1
