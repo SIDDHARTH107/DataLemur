@@ -4589,3 +4589,31 @@ SELECT  DENSE_RANK() OVER(ORDER BY SUM(n_messages) DESC),
         SUM(n_messages)
 FROM airbnb_contacts
 GROUP BY id_guest;
+
+177.
+
+Identify returning active users by finding users who made a repeat purchase within 7 days or less of their previous transaction, excluding same-day purchases. Output a list of these user_id.
+
+Mode: Medium
+ID: 10553
+Company: Amazon
+Table: amazon_transactions
+
+WITH ordered_tx AS (
+  SELECT
+    user_id,
+    created_at::date AS tx_date,
+    LAG(created_at::date) OVER (
+      PARTITION BY user_id ORDER BY created_at
+    ) AS prev_tx_date
+  FROM amazon_transactions
+)
+SELECT DISTINCT user_id
+FROM ordered_tx
+WHERE prev_tx_date IS NOT NULL
+  AND tx_date - prev_tx_date <= 7;
+
+178.
+
+
+
